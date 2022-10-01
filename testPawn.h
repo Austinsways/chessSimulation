@@ -204,44 +204,38 @@ private:
     * GET MOVES - Blocked by another piece
     * +---a-b-c-d-e-f-g-h---+
     * |                     |
-    * 8                     8
-    * 7                     7
+    * 8     *               8
+    * 7    (p)              7
     * 6                     6
-    * 5         P           5
-    * 4        (p)          4
+    * 5                     5
+    * 4                     4
     * 3                     3
     * 2                     2
     * 1                     1
     * |                     |
     * +---a-b-c-d-e-f-g-h---+
     **************************************************/
-   void getMoves_blocked()
+   void getMoves_promotion()
    {
        // setup
        Board board;
 
        Pawn pawn;
        pawn.white = true;
-       pawn.position = Position(3, 3); // d4
+       pawn.position = Position(1, 6); // b7
        board.assign(pawn);
-
-       Pawn pawn2;
-       pawn2.white = true;
-       pawn2.position = Position(3, 4); // d5
-       board.assign(pawn2);
 
        // exercise
        auto moves = pawn.getMoves(board);
 
        // verify
-       set<string> expectedMoves{};
+       set<string> expectedMoves{ "b7b8Q" };
        set<string> actualMoves;
        for (auto move : moves)
            actualMoves.insert(move.getText());
 
        assert(expectedMoves == actualMoves);
-       assert(pawn.position == Position(3, 3));
-       assert(pawn2.position == Position(3, 4));
+       assert(pawn.position == Position(1, 6));
 
    }  // cleanup
 };
