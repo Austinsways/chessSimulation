@@ -6,7 +6,8 @@
 class TestPawn
 {
 public:
-   void run() {
+   void run()
+   {
       getMoves__blocked();
    }
 
@@ -16,7 +17,7 @@ private:
       // setup
       Board board;
       Pawn pawn;
-      
+
 
       // exercise
       auto moves = pawn.getMoves(board);

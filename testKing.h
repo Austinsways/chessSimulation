@@ -8,11 +8,11 @@ class TestKing
 public:
    void run()
    {
-      getMoves__blocked();
+      getMoves__free();
    }
 
 private:
-   void getMoves__blocked()
+   void getMoves__free()
    {
       // setup
       Board board;

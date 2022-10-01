@@ -9,9 +9,11 @@ class TestBoard;
 class Board
 {
 public:
-	friend TestBoard;
+   friend TestBoard;
 
-	Board() {}
+   Board() {}
+
+   void assign(Piece piece) {}
 
 private:
 

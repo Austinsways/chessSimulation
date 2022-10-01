@@ -8,7 +8,7 @@
 class Position
 {
 public:
-	Position() {}
+   Position() {}
 
 private:
 

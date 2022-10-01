@@ -11,10 +11,10 @@ using namespace std;
 class TestBoard
 {
 public:
-	void run()
-	{
+   void run()
+   {
 
-	}
+   }
 
 private:
 

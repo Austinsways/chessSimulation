@@ -1,6 +1,6 @@
 /**********************************************************************
  * GL Demo
- * Just a simple program to demonstrate how to create an Open GL window, 
+ * Just a simple program to demonstrate how to create an Open GL window,
  * draw something on the window, and accept simple user input
  **********************************************************************/
 
@@ -141,7 +141,7 @@ set <int> getPossibleMoves(const char* board, int location)
    //
    if (board[location] == 'N' || board[location] == 'n')
    {
-      RC moves[8] = 
+      RC moves[8] =
       {
                {-1,  2}, { 1,  2},
       {-2,  1},                    { 2,  1},
@@ -152,7 +152,7 @@ set <int> getPossibleMoves(const char* board, int location)
       {
          r = row + moves[i].row;
          c = col + moves[i].col;
-         if ( amBlack && isNotBlack(board, r, c))
+         if (amBlack && isNotBlack(board, r, c))
             possible.insert(r * 8 + c);
          if (!amBlack && isNotWhite(board, r, c))
             possible.insert(r * 8 + c);
@@ -174,7 +174,7 @@ set <int> getPossibleMoves(const char* board, int location)
       {
          r = row + moves[i].row;
          c = col + moves[i].col;
-         if ( amBlack && isNotBlack(board, r, c))
+         if (amBlack && isNotBlack(board, r, c))
             possible.insert(r * 8 + c);
          if (!amBlack && isNotWhite(board, r, c))
             possible.insert(r * 8 + c);
@@ -197,14 +197,14 @@ set <int> getPossibleMoves(const char* board, int location)
       {
          r = row + moves[i].row;
          c = col + moves[i].col;
-         while (r >= 0 && r < 8 && c >= 0 && c < 8 && 
-                board[r * 8 + c] == ' ')
+         while (r >= 0 && r < 8 && c >= 0 && c < 8 &&
+            board[r * 8 + c] == ' ')
          {
             possible.insert(r * 8 + c);
             r += moves[i].row;
             c += moves[i].col;
          }
-         if ( amBlack && isNotBlack(board, r, c))
+         if (amBlack && isNotBlack(board, r, c))
             possible.insert(r * 8 + c);
          if (!amBlack && isNotWhite(board, r, c))
             possible.insert(r * 8 + c);
@@ -275,10 +275,10 @@ set <int> getPossibleMoves(const char* board, int location)
  * DRAW
  * Draw the current state of the game
  ***************************************************/
-void draw(const char* board, const Interface & ui, const set <int> & possible)
+void draw(const char* board, const Interface& ui, const set <int>& possible)
 {
    ogstream gout;
-   
+
    // draw the checkerboard
    gout.drawBoard();
 
@@ -287,7 +287,7 @@ void draw(const char* board, const Interface & ui, const set <int> & possible)
    gout.drawSelected(ui.getSelectPosition());
 
    // draw the possible moves
-   set <int> :: iterator it;
+   set <int> ::iterator it;
    for (it = possible.begin(); it != possible.end(); ++it)
       gout.drawPossible(*it);
 
@@ -335,7 +335,7 @@ void draw(const char* board, const Interface & ui, const set <int> & possible)
 }
 
 /*********************************************
- * MOVE 
+ * MOVE
  * Execute one movement. Return TRUE if successful
  *********************************************/
 bool move(char* board, int positionFrom, int positionTo)
@@ -369,13 +369,13 @@ bool move(char* board, int positionFrom, int positionTo)
  * engine will wait until the proper amount of
  * time has passed and put the drawing on the screen.
  **************************************/
-void callBack(Interface *pUI, void * p)
+void callBack(Interface* pUI, void* p)
 {
    set <int> possible;
 
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
-   char * board = (char *)p;  
+   char* board = (char*)p;
 
    // move 
    if (move(board, pUI->getPreviousPosition(), pUI->getSelectPosition()))
@@ -456,7 +456,7 @@ void parse(const string& textMove, int& positionFrom, int& positionTo)
 
    // error checking
    if (positionFrom < 0 || positionFrom >= 64 ||
-       positionTo   < 0 || positionTo   >= 64)
+      positionTo < 0 || positionTo >= 64)
       positionFrom = positionTo = -1;
 }
 
@@ -502,7 +502,7 @@ int WINAPI WinMain(
 int main(int argc, char** argv)
 #endif // !_WIN32
 {
-   Interface ui("Chess");    
+   Interface ui("Chess");
 
    // Initialize the game class
    // note this is upside down: 0 row is at the bottom
@@ -517,11 +517,11 @@ int main(int argc, char** argv)
       'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P',
       'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'
    };
-   
+
 #ifdef _WIN32
- //  int    argc;
- //  LPWSTR * argv = CommandLineToArgvW(GetCommandLineW(), &argc);
- //  string filename = argv[1];
+   //  int    argc;
+   //  LPWSTR * argv = CommandLineToArgvW(GetCommandLineW(), &argc);
+   //  string filename = argv[1];
    if (__argc == 2)
       readFile(__argv[1], board);
 #else // !_WIN32
@@ -536,7 +536,7 @@ int main(int argc, char** argv)
 
 
    // set everything into action
-   ui.run(callBack, board);             
+   ui.run(callBack, board);
 
    return 0;
 }
