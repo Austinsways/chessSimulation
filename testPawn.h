@@ -17,6 +17,8 @@ public:
       getMoves_simpleMove();
       getMoves_initialMove();
       getMoves_capture();
+      getMoves_enpassant();
+      getMoves_promotion();
    }
 
 private:
@@ -197,6 +199,66 @@ private:
       assert(pawn2.position == Position(0, 6));
       assert(pawn3.position == Position(1, 6));
       assert(pawn4.position == Position(2, 6));
+
+   }  // cleanup
+
+    /**************************************************
+    * GET MOVES - Blocked by another piece
+    * +---a-b-c-d-e-f-g-h---+
+    * |                     |
+    * 8                     8
+    * 7                     7
+    * 6   . P .             6
+    * 5   P(p)P             5
+    * 4                     4
+    * 3                     3
+    * 2                     2
+    * 1                     1
+    * |                     |
+    * +---a-b-c-d-e-f-g-h---+
+    **************************************************/
+
+   void getMoves_enpassant()
+   {
+       // setup
+       Board board;
+
+       Pawn pawn;
+       pawn.white = true;
+       pawn.position = Position(1, 4); // b5
+       board.assign(pawn);
+
+       Pawn pawn2;
+       pawn2.white = false;
+       pawn2.position = Position(1, 5); // b6
+       board.assign(pawn2);
+
+       Pawn pawn3;
+       pawn3.white = false;
+       pawn3.position = Position(0, 4); // a5
+       board.assign(pawn3);
+       // Check on last move
+
+       Pawn pawn4;
+       pawn4.white = false;
+       pawn4.position = Position(2, 4); // c5
+       board.assign(pawn4);
+       // Check on last move
+
+       // exercise
+       auto moves = pawn.getMoves(board);
+
+       // verify
+       set<string> expectedMoves{ "b5c6E", "b5a6E" };
+       set<string> actualMoves;
+       for (auto move : moves)
+           actualMoves.insert(move.getText());
+
+       assert(expectedMoves == actualMoves);
+       assert(pawn.position == Position(1, 4));
+       assert(pawn2.position == Position(1, 5));
+       assert(pawn3.position == Position(0, 4));
+       assert(pawn4.position == Position(2, 4));
 
    }  // cleanup
 
