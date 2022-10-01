@@ -6,6 +6,8 @@
 
 #include "uiInteract.h"   // for Interface
 #include "uiDraw.h"       // for draw*
+#include "testPawn.h"     // for Pawn unit tests
+#include "testKing.h"     // for King unit tests
 #include <set>            // for STD::SET
 #include <cassert>        // for ASSERT
 #include <fstream>        // for IFSTREAM
@@ -526,6 +528,12 @@ int main(int argc, char** argv)
    if (argc == 2)
       readFile(argv[1], board);
 #endif // !_WIN32
+
+   TestPawn testPawn;
+   testPawn.run();
+   TestKing testKing;
+   testKing.run();
+
 
    // set everything into action
    ui.run(callBack, board);             
