@@ -1,5 +1,10 @@
 #pragma once
 
+#include <memory>
+
+//#include "piece.h"
+
+class Piece;
 class TestBoard;
 
 /**************************************************
@@ -13,7 +18,7 @@ public:
 
    Board() {}
 
-   void assign(Piece piece) {}
+   void assign(Piece& piece) {}
 
 private:
 
