@@ -33,7 +33,7 @@ public:
 
 protected:
 	Position position;
-	bool fWhite;
+	bool white;
 	int nMoves;
 	int lastMove;
 
