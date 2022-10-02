@@ -217,7 +217,6 @@ private:
     * |                     |
     * +---a-b-c-d-e-f-g-h---+
     **************************************************/
-
    void getMoves_enpassant()
    {
        // setup
@@ -236,14 +235,14 @@ private:
        Pawn pawn3;
        pawn3.white = false;
        pawn3.position = Position(0, 4); // a5
+       pawn3.lastMove = 1;
        board.assign(pawn3);
-       // Check on last move
 
        Pawn pawn4;
        pawn4.white = false;
        pawn4.position = Position(2, 4); // c5
+       pawn4.lastMove = 1;
        board.assign(pawn4);
-       // Check on last move
 
        // exercise
        auto moves = pawn.getMoves(board);
