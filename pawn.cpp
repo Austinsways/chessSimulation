@@ -66,7 +66,6 @@ list<Move> Pawn::getMoves(const Board& board) const
       }
    }
 
-
    // En Passant
    struct EnPassant
    {

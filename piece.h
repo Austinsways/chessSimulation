@@ -27,8 +27,8 @@ public:
 
 	Piece() : nMoves(0), lastMove(-1) {}
 	Piece(int row, int col, bool white) : nMoves(0), lastMove(-1) {}
-	void assign(Position pos) {}
-	void assign(Piece& piece) {}
+	void assign(const Position& pos) {}
+	void assign(const Piece& piece) {}
 	bool isWhite() const { return white; }
 	bool isMove() const {}
 	int getNMoves() const { return nMoves; }

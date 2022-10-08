@@ -26,10 +26,19 @@ Board::Board() : currentMove(0)
  * BOARD :: GET
  * Get a piece from the board
  **************************************************/
-const Piece& Board::get(const Position pos) const
+const Piece& Board::get(const Position& pos) const
 {
    if (!pos.isValid())
       throw "Cannot get piece from invalid position";
 
    return *board[pos.getLocation()];
+}
+
+/**************************************************
+ * BOARD :: ASSIGN
+ * Assign a Piece to the Board
+ **************************************************/
+void Board::assign(const Piece& piece)
+{
+   // TODO
 }

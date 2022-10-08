@@ -26,7 +26,7 @@ public:
       castleK(false),
       castleQ(false),
       isWhite(isWhite) { }
-   std::string getText() const { return ""; }
+   std::string getText() const;
    Position getSrc() const { return source; }
    Position getDest() const { return dest; }
    char getPromotion() const { return piece; }
@@ -40,8 +40,8 @@ public:
    void setCastleK(bool castleK) { this->castleK = castleK; }
    void setCastleQ(bool castleQ) { this->castleQ = castleQ; }
    void setWhiteMove(bool isWhite) { this->isWhite = isWhite; }
-   void assign(Move move) {}
-   void assign(std::string move) {}
+   void assign(const Move& move) {}
+   void assign(const std::string& move) {}
 
 private:
    Position source;
