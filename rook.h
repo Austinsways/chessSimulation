@@ -1,3 +1,9 @@
+/**************************************************
+ * Authors:
+ *    Austin Eldredge
+ *    Lehi Lopez
+ *    Eddie McConkie
+ **************************************************/
 #include "piece.h"
 
 using namespace::std;

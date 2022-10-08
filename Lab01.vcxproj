@@ -99,6 +99,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="chess.cpp" />
+    <ClCompile Include="move.cpp" />
     <ClCompile Include="uiDraw.cpp" />
     <ClCompile Include="uiInteract.cpp" />
   </ItemGroup>
@@ -109,6 +110,7 @@
     <ClInclude Include="pawn.h" />
     <ClInclude Include="piece.h" />
     <ClInclude Include="position.h" />
+    <ClInclude Include="rook.h" />
     <ClInclude Include="testBoard.h" />
     <ClInclude Include="testKing.h" />
     <ClInclude Include="testPawn.h" />

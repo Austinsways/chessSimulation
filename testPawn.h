@@ -1,3 +1,9 @@
+/**************************************************
+ * Authors:
+ *    Austin Eldredge
+ *    Lehi Lopez
+ *    Eddie McConkie
+ **************************************************/
 #pragma once
 
 #include <cassert>
