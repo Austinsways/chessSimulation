@@ -6,7 +6,7 @@
  **************************************************/
 
 #include "board.h"
-
+#include "space.h"
 using namespace std;
 
 /**************************************************
@@ -18,7 +18,7 @@ Board::Board() : currentMove(0)
    {
       int row = i / 8;
       int col = i % 8;
-      board[i] = make_unique<Pawn>(Pawn(row, col, i < 16));
+      board[i] = make_unique<Space>(Space(row, col, i < 16));
    }
 }
 
