@@ -7,13 +7,16 @@
 
 #include "king.h"
 #include "move.h"
-#include "board.h"
+
+
 
 #include <list>
 
 using namespace std;
 
-list<Move> Pawn::getMoves(const Board& board) const
+
+
+list<Move> King::getMoves(const Board& board) const
 {
     list<Move> moves;
     int lastRow = white ? 7 : 0;
@@ -132,8 +135,9 @@ list<Move> Pawn::getMoves(const Board& board) const
             Move move(position, newPosition, white);
         }
 
+        
         //first 2 is for the three spots between rook and king, increasing or decreasing based on color
-        bool valid = true;
+        valid = true;
         //we'll need to add a thing to find if the rook is there later.
         for (int i = 0; white ? i < -2 : i >2; white ? i += 1 : i -= 1) {
             Position locationCheck(getPosition());

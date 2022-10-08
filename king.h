@@ -24,7 +24,7 @@ public:
 
    char getLetter() const { return 'k'; }
    void display(ogstream gout) const {}
-   std::list<Move> getMoves(const Board& board) const { return std::list<Move>(); }
+   std::list<Move> getMoves(const Board& board) const;
 
 private:
 

@@ -34,11 +34,3 @@ const Piece& Board::get(const Position& pos) const
    return *board[pos.getLocation()];
 }
 
-/**************************************************
- * BOARD :: ASSIGN
- * Assign a Piece to the Board
- **************************************************/
-void Board::assign(const Piece& piece)
-{
-    board[(piece.getPosition().getCol() + 1 * piece.getPosition().getRow() + 1)] = make_unique<Piece>(piece);
-}

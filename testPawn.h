@@ -51,7 +51,7 @@ private:
       Pawn pawn;
       pawn.white = true;
       pawn.position = Position(3, 3); // d4
-      board.assign(pawn);
+      board.assign<Pawn>(pawn);
 
       Pawn pawn2;
       pawn2.white = true;

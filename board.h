@@ -33,7 +33,12 @@ public:
    const Piece& get(const Position& pos) const;
    void reset() {}
    void move(const Move& move) {}
-   void assign(const Piece& piece);
+   template<class T> void assign(const T& piece) {
+	   
+		   board[(piece.getPosition().getCol() + 1 * piece.getPosition().getRow() + 1)] = make_unique<T>(piece);
+	   
+
+   };
 
 private:
    std::array<std::unique_ptr<Piece>, 64> board;
