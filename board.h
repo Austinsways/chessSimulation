@@ -7,10 +7,14 @@
 #pragma once
 
 #include <memory>
+#include <array>
 
-//#include "piece.h"
+#include "uiDraw.h"
+#include "piece.h"
+#include "pawn.h"
+#include "position.h"
+#include "move.h"
 
-class Piece;
 class TestBoard;
 
 /**************************************************
@@ -22,11 +26,18 @@ class Board
 public:
    friend TestBoard;
 
-   Board() {}
-
+   Board();
+   int getCurrentMove() const { return currentMove; }
+   bool whiteTurn() const { return currentMove % 2 == 1; }
+   void display(Position hover, Position selected) const {}
+   const Piece& get(const Position pos) const;
+   void reset() {}
+   void move(Move move) {}
    void assign(Piece& piece) {}
 
 private:
-
+   std::array<std::unique_ptr<Piece>, 64> board;
+   int currentMove;
+   void swap(Position pos1, Position pos2) {}
 };
 

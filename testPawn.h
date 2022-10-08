@@ -64,7 +64,7 @@ private:
       // verify
       set<string> expectedMoves{};
       set<string> actualMoves;
-      for (auto move : moves)
+      for (auto& move : moves)
          actualMoves.insert(move.getText());
 
       assert(expectedMoves == actualMoves);
@@ -104,7 +104,7 @@ private:
       // verify
       set<string> expectedMoves{ "b4b5" };
       set<string> actualMoves;
-      for (auto move : moves)
+      for (auto& move : moves)
          actualMoves.insert(move.getText());
 
       assert(expectedMoves == actualMoves);
@@ -143,7 +143,7 @@ private:
       // verify
       set<string> expectedMoves{ "b2b3", "b2b4" };
       set<string> actualMoves;
-      for (auto move : moves)
+      for (auto& move : moves)
          actualMoves.insert(move.getText());
 
       assert(expectedMoves == actualMoves);
@@ -197,7 +197,7 @@ private:
       // verify
       set<string> expectedMoves{ "b6a7p", "b6c7p" };
       set<string> actualMoves;
-      for (auto move : moves)
+      for (auto& move : moves)
          actualMoves.insert(move.getText());
 
       assert(expectedMoves == actualMoves);
@@ -225,45 +225,45 @@ private:
     **************************************************/
    void getMoves_enpassant()
    {
-       // setup
-       Board board;
+      // setup
+      Board board;
 
-       Pawn pawn;
-       pawn.white = true;
-       pawn.position = Position(1, 4); // b5
-       board.assign(pawn);
+      Pawn pawn;
+      pawn.white = true;
+      pawn.position = Position(1, 4); // b5
+      board.assign(pawn);
 
-       Pawn pawn2;
-       pawn2.white = false;
-       pawn2.position = Position(1, 5); // b6
-       board.assign(pawn2);
+      Pawn pawn2;
+      pawn2.white = false;
+      pawn2.position = Position(1, 5); // b6
+      board.assign(pawn2);
 
-       Pawn pawn3;
-       pawn3.white = false;
-       pawn3.position = Position(0, 4); // a5
-       pawn3.lastMove = 1;
-       board.assign(pawn3);
+      Pawn pawn3;
+      pawn3.white = false;
+      pawn3.position = Position(0, 4); // a5
+      pawn3.lastMove = 1;
+      board.assign(pawn3);
 
-       Pawn pawn4;
-       pawn4.white = false;
-       pawn4.position = Position(2, 4); // c5
-       pawn4.lastMove = 1;
-       board.assign(pawn4);
+      Pawn pawn4;
+      pawn4.white = false;
+      pawn4.position = Position(2, 4); // c5
+      pawn4.lastMove = 1;
+      board.assign(pawn4);
 
-       // exercise
-       auto moves = pawn.getMoves(board);
+      // exercise
+      auto moves = pawn.getMoves(board);
 
-       // verify
-       set<string> expectedMoves{ "b5c6E", "b5a6E" };
-       set<string> actualMoves;
-       for (auto move : moves)
-           actualMoves.insert(move.getText());
+      // verify
+      set<string> expectedMoves{ "b5c6E", "b5a6E" };
+      set<string> actualMoves;
+      for (auto& move : moves)
+         actualMoves.insert(move.getText());
 
-       assert(expectedMoves == actualMoves);
-       assert(pawn.position == Position(1, 4));
-       assert(pawn2.position == Position(1, 5));
-       assert(pawn3.position == Position(0, 4));
-       assert(pawn4.position == Position(2, 4));
+      assert(expectedMoves == actualMoves);
+      assert(pawn.position == Position(1, 4));
+      assert(pawn2.position == Position(1, 5));
+      assert(pawn3.position == Position(0, 4));
+      assert(pawn4.position == Position(2, 4));
 
    }  // cleanup
 
@@ -284,25 +284,25 @@ private:
     **************************************************/
    void getMoves_promotion()
    {
-       // setup
-       Board board;
+      // setup
+      Board board;
 
-       Pawn pawn;
-       pawn.white = true;
-       pawn.position = Position(1, 6); // b7
-       board.assign(pawn);
+      Pawn pawn;
+      pawn.white = true;
+      pawn.position = Position(1, 6); // b7
+      board.assign(pawn);
 
-       // exercise
-       auto moves = pawn.getMoves(board);
+      // exercise
+      auto moves = pawn.getMoves(board);
 
-       // verify
-       set<string> expectedMoves{ "b7b8Q" };
-       set<string> actualMoves;
-       for (auto move : moves)
-           actualMoves.insert(move.getText());
+      // verify
+      set<string> expectedMoves{ "b7b8Q" };
+      set<string> actualMoves;
+      for (auto& move : moves)
+         actualMoves.insert(move.getText());
 
-       assert(expectedMoves == actualMoves);
-       assert(pawn.position == Position(1, 6));
+      assert(expectedMoves == actualMoves);
+      assert(pawn.position == Position(1, 6));
 
    }  // cleanup
 };

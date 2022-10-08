@@ -22,9 +22,9 @@ public:
    King() : Piece() {}
    King(int row, int col, bool white) : Piece(row, col, white) {}
 
-   char getLetter() { return 'K'; }
-   void display(ogstream gout) {}
-   std::list<Move> getMoves(Board board) { return std::list<Move>(); }
+   char getLetter() const { return 'k'; }
+   void display(ogstream gout) const {}
+   std::list<Move> getMoves(const Board& board) const { return std::list<Move>(); }
 
 private:
 

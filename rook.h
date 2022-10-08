@@ -9,15 +9,16 @@
 using namespace::std;
 class TestKing;
 
-class Rook : public Piece{
+class Rook : public Piece
+{
 public:
-    friend TestKing;
+   friend TestKing;
 
-    Rook() : Piece() {}
-    Rook(int row, int col, bool white) : Piece(row, col, white) {}
+   Rook() : Piece() {}
+   Rook(int row, int col, bool white) : Piece(row, col, white) {}
 
-    char getLetter() { return 'P'; }
-   void display(ogstream gout) {}
-   std::list<Move> getMoves(Board board) { return std::list<Move>(); }
+   char getLetter() const { return 'r'; }
+   void display(ogstream gout) const {}
+   std::list<Move> getMoves(const Board& board) const { return std::list<Move>(); }
 
 };

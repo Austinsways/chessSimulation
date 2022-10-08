@@ -10,9 +10,10 @@
 
 #include "uiDraw.h"
 #include "move.h"
-#include "board.h"
+//#include "board.h"
 #include "position.h"
 
+class Board;
 class TestPiece;
 
 /**************************************************
@@ -24,18 +25,18 @@ class Piece
 public:
 	friend TestPiece;
 
-	Piece() {}
-	Piece(int row, int col, bool white) {}
+	Piece() : nMoves(0), lastMove(-1) {}
+	Piece(int row, int col, bool white) : nMoves(0), lastMove(-1) {}
 	void assign(Position pos) {}
-	void assign(Piece* piece) {}
-	bool isWhite() {}
-	bool isMove() {}
-	int getNMoves() {}
-	Position getPosition() {}
-	bool justMoved() {}
-	virtual char getLetter() = 0;
-	virtual void display(ogstream gout) = 0;
-	virtual std::list<Move> getMoves(Board board) = 0;
+	void assign(Piece& piece) {}
+	bool isWhite() const { return white; }
+	bool isMove() const {}
+	int getNMoves() const { return nMoves; }
+	Position getPosition() const { return position; }
+	bool justMoved(const Board& board) const;
+	virtual char getLetter() const = 0;
+	virtual void display(ogstream gout) const = 0;
+	virtual std::list<Move> getMoves(const Board& board) const = 0;
 
 protected:
 	Position position;

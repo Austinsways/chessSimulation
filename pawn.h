@@ -6,11 +6,11 @@
  **************************************************/
 #pragma once
 
-#include <list>
-
 #include "move.h"
 #include "piece.h"
 #include "board.h"
+
+#include <list>
 
 class TestPawn;
 
@@ -22,10 +22,7 @@ public:
    Pawn() : Piece() {}
    Pawn(int row, int col, bool white) : Piece(row, col, white) {}
 
-   char getLetter() { return 'P'; }
-   void display(ogstream gout) {}
-   std::list<Move> getMoves(Board board) { return std::list<Move>(); }
-
-private:
-
+   char getLetter() const { return 'p'; }
+   void display(ogstream gout) const {}
+   std::list<Move> getMoves(const Board& board) const;
 };
