@@ -147,46 +147,7 @@ list<Move> Pawn::getMoves(const Board& board) const
             Move move(position, newPosition, white);
         }
     }
-
-
-
-
-    // En Passant
-    struct EnPassant
-    {
-        Position pawnPos;
-        Position attackPos;
-    };
-
-    int enpassantRow = white ? 4 : 3;
-    if (position.getRow() == enpassantRow)
-    {
-        Position left(position);
-        left.adjustCol(-1);
-        Position right(position);
-        right.adjustCol(1);
-        EnPassant sides[2];
-        sides[0].pawnPos = left;
-        sides[0].attackPos = diagonalLeft;
-        sides[1].pawnPos = right;
-        sides[1].attackPos = diagonalRight;
-        for (const auto& side : sides)
-        {
-            if (side.pawnPos.isValid())
-            {
-                const Piece& opponent = board.get(side.pawnPos);
-                if (opponent.getLetter() == 'p'
-                    && opponent.isWhite() != white
-                    && opponent.justMoved(board)
-                    )
-                {
-                    Move move(position, side.attackPos, white);
-                    move.setEnPassant(true);
-                    moves.push_back(move);
-                }
-            }
-        }
-    }
+    
 
     return moves;
 }
