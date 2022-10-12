@@ -26,8 +26,8 @@ class Piece
 public:
 	friend TestPiece;
 
-	Piece() : nMoves(0), lastMove(-1) {}
-	Piece(int row, int col, bool white) : nMoves(0), lastMove(-1) {}
+	Piece() : white(true), nMoves(0), lastMove(-1), position(Position()) {}
+	Piece(int col, int row, bool white) : white(white), nMoves(0), lastMove(-1), position(Position(col, row)) {}
 	void assign(const Position& pos) {}
 	void assign(const Piece& piece) {}
 	bool isWhite() const { return white; }
@@ -40,6 +40,9 @@ public:
 	virtual std::list<Move> getMoves(const Board& board) const = 0;
 	virtual std::unique_ptr<Piece> clone() const = 0;
 
+	//virtual bool operator==(char rhs) { return getLetter() == rhs; }
+	//virtual bool operator!=(char rhs) { return !(*this == rhs); }
+
 protected:
 	Position position;
 	bool white;
@@ -48,3 +51,5 @@ protected:
 
 };
 
+bool operator==(const Piece& lhs, char rhs);
+bool operator!=(const Piece& lhs, char rhs);

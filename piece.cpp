@@ -17,3 +17,13 @@ using namespace std;
 bool Piece::justMoved(const Board& board) const {
    return board.getCurrentMove() - lastMove == 1;
 }
+
+bool operator==(const Piece& lhs, char rhs)
+{
+   return lhs.getLetter() == rhs;
+}
+
+bool operator!=(const Piece& lhs, char rhs)
+{
+   return !(lhs == rhs);
+}

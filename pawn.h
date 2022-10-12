@@ -21,7 +21,7 @@ public:
    friend TestPawn;
 
    Pawn() : Piece() {}
-   Pawn(int row, int col, bool white) : Piece(row, col, white) {}
+   Pawn(int col, int row, bool white) : Piece(col, row, white) {}
 
    char getLetter() const { return 'p'; }
    void display(ogstream gout) const {}

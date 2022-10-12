@@ -69,24 +69,30 @@ private:
 
    void getMoves_blocked()
    {
-
-
       // setup
       Board board;
 
       King king;
+      king.white = true;
+      king.position = Position(4, 5); // e5
+      board.assign(king);
 
       Pawn pawn1(3, 6, true);
+      board.assign(pawn1);
       Pawn pawn2(4, 6, true);
+      board.assign(pawn2);
       Pawn pawn3(5, 6, true);
+      board.assign(pawn3);
       Pawn pawn4(3, 5, true);
+      board.assign(pawn4);
       Pawn pawn5(5, 5, true);
+      board.assign(pawn5);
       Pawn pawn6(3, 4, true);
+      board.assign(pawn6);
       Pawn pawn7(4, 4, true);
+      board.assign(pawn7);
       Pawn pawn8(5, 4, true);
-
-
-      king.position = Position(4, 5); // e5
+      board.assign(pawn8);
 
       // exercise
       auto moves = king.getMoves(board);
@@ -108,24 +114,32 @@ private:
       Board board;
 
       King king;
+      king.position = Position(4, 5); // e6
+      king.white = true;
+      board.assign(king);
 
       Pawn pawn1(3, 6, false);
+      board.assign(pawn1);
       Pawn pawn2(4, 6, false);
+      board.assign(pawn2);
       Pawn pawn3(5, 6, false);
+      board.assign(pawn3);
       Pawn pawn4(3, 5, false);
+      board.assign(pawn4);
       Pawn pawn5(5, 5, false);
+      board.assign(pawn5);
       Pawn pawn6(3, 4, false);
+      board.assign(pawn6);
       Pawn pawn7(4, 4, false);
+      board.assign(pawn7);
       Pawn pawn8(5, 4, false);
-
-
-      king.position = Position(4, 5); // e5
+      board.assign(pawn8);
 
       // exercise
       auto moves = king.getMoves(board);
 
       // verify
-      set<string> expectedMoves{ "e5d6p", "e5e6p", "e5f6p", "e5d5p", "e5f5p", "e5d4p", "e5e4p", "e5f4p" };
+      set<string> expectedMoves{ "e6d6p", "e6e5p", "e6f6p", "e6d5p", "e6f5p", "e6d7p", "e6e7p", "e6f7p" };
       set<string> actualMoves;
       for (auto& move : moves)
          actualMoves.insert(move.getText());
@@ -141,10 +155,10 @@ private:
       Board board;
 
       King king;
-      king.position = Position(4, 1); // e1
+      king.position = Position(4, 0); // e1
       king.nMoves = 1;
 
-      Rook rook1(1, 0, true);//a1
+      Rook rook1(0, 0, true);//a1
       Rook rook2(7, 0, true);//h1
 
       // exercise
@@ -167,11 +181,11 @@ private:
       Board board;
 
       King king;
-      king.position = Position(4, 1); // e1
+      king.position = Position(4, 0); // e1
 
-      Rook rook1(1, 1, true);//a1
+      Rook rook1(1, 0, true);//a1
       rook1.nMoves = 1;
-      Rook rook2(7, 1, true);//h1
+      Rook rook2(7, 0, true);//h1
       rook1.nMoves = 1;
 
       // exercise
@@ -194,12 +208,12 @@ private:
       Board board;
 
       King king;
-      king.position = Position(4, 1); // e1
+      king.position = Position(4, 0); // e1
       king.nMoves = 0;
 
-      Rook rook1(1, 1, true);//a1
+      Rook rook1(1, 0, true);//a1
       rook1.nMoves = 0;
-      Rook rook2(7, 1, true);//h1
+      Rook rook2(7, 0, true);//h1
       rook2.nMoves = 0;
 
       Pawn pawn4(1, 0, false);//b1
@@ -225,20 +239,22 @@ private:
       Board board;
 
       King king;
-
-      Rook rook1(1, 1, true);//a1
-      rook1.nMoves = 0;
-      Rook rook2(7, 1, true);//h1
-      rook2.nMoves = 0;
-
-      king.position = Position(4, 1); // e1
+      king.position = Position(4, 0); // e1
       king.nMoves = 0;
+      board.assign(king);
+
+      Rook rook1(0, 0, true);//a1
+      rook1.nMoves = 0;
+      board.assign(rook1);
+      Rook rook2(7, 0, true);//h1
+      rook2.nMoves = 0;
+      board.assign(rook2);
 
       // exercise
       auto moves = king.getMoves(board);
 
       // verify
-      set<string> expectedMoves{ "e1f1", "e1d1", "E1g1c", "e1c1C", "e1d2", "e1e2", "e1f2" };
+      set<string> expectedMoves{ "e1f1", "e1d1", "e1g1c", "e1c1C", "e1d2", "e1e2", "e1f2" };
       set<string> actualMoves;
       for (auto& move : moves)
          actualMoves.insert(move.getText());
