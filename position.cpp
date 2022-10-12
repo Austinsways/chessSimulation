@@ -11,7 +11,7 @@
   * POSITION :: SET
   * Set the position with a row and column
   **************************************************/
-void Position::set(int row, int col)
+void Position::set(int col, int row)
 {
    if (row < 0 || row > 7 || col < 0 || col > 7)
       location = -1;

@@ -15,9 +15,9 @@ class Position
 {
 public:
    Position() : location(0), squareWidth(50), squareHeight(50) {}
-   Position(int row, int col) : squareWidth(50), squareHeight(50)
+   Position(int col, int row) : squareWidth(50), squareHeight(50)
    {
-      set(row, col);
+      set(col, row);
    }
    int getLocation() const { return location; }
    int getRow() const { return (int)location / 8; }
@@ -25,11 +25,11 @@ public:
    int getX() const { return getCol() * squareWidth; }
    int getY() const { return getRow() * squareHeight; }
    bool isValid() const { return 0 <= location && location < 64; }
-   void setRow(int row) { set(row, getCol()); }
-   void setCol(int col) { set(getRow(), col); }
-   void set(int row, int col);
-   void adjustRow(int delta) { set(getRow() + delta, getCol()); }
-   void adjustCol(int delta) { set(getRow(), getCol() + delta); }
+   void setRow(int row) { set(getCol(), row); }
+   void setCol(int col) { set(col, getRow()); }
+   void set(int col, int row);
+   void adjustRow(int delta) { set(getCol(), getRow() + delta); }
+   void adjustCol(int delta) { set(getCol() + delta, getRow()); }
    bool operator==(const Position& rhs) { return location == rhs.getLocation(); }
 
 private:

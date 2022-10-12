@@ -51,7 +51,7 @@ private:
       King king;
       king.white = true;
       king.position = Position(4, 4); // e5
-      board.assign<King>(king);
+      board.assign(king);
 
       // exercise
       auto moves = king.getMoves(board);

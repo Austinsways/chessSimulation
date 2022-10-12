@@ -26,7 +26,7 @@ list<Move> Pawn::getMoves(const Board& board) const
       Move move(position, oneAhead, white);
       if (oneAhead.getRow() == lastRow)
          move.setPromotion('Q');
-      moves.push_back(Move(position, oneAhead, white));
+      moves.push_back(move);
    }
 
    // Move two spaces

@@ -25,7 +25,5 @@ public:
    char getLetter() const { return 'k'; }
    void display(ogstream gout) const {}
    std::list<Move> getMoves(const Board& board) const;
-
-private:
-
+   virtual std::unique_ptr<Piece> clone() const { return std::make_unique<King>(*this); };
 };

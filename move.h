@@ -22,6 +22,8 @@ public:
    Move(Position source, Position dest, bool isWhite) :
       source(source),
       dest(dest),
+      piece(' '),
+      capture(' '),
       enpassant(false),
       castleK(false),
       castleQ(false),

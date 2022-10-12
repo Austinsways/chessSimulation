@@ -7,6 +7,7 @@
 #pragma once
 
 #include <list>
+#include <memory>
 
 #include "uiDraw.h"
 #include "move.h"
@@ -37,6 +38,7 @@ public:
 	virtual char getLetter() const = 0;
 	virtual void display(ogstream gout) const = 0;
 	virtual std::list<Move> getMoves(const Board& board) const = 0;
+	virtual std::unique_ptr<Piece> clone() const = 0;
 
 protected:
 	Position position;

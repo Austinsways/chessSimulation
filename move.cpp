@@ -23,26 +23,22 @@ string Move::getText() const
 	text += (char)('a' + dest.getCol());
 	text += (char)('1' + dest.getRow());
 
-	if (capture) {
+	if ('a' <= capture && capture < 'z')
 		text += capture;
-	}
+
+	if ('A' <= piece && piece <= 'Z')
+		text += piece;
+	
+	if (enpassant)
+		text += 'E';
+
+	if (castleK)
+		text += 'c';
+
+	if (castleQ)
+		text += 'C';
 
 	return text;
-
-	//	row = source / 8;
-	//col = source % 8;
-
-	//text = text + ('a' + col); // concatenate a character according to row
-	//text = text + tostr(row); // concatenate the row as a character
-
-	//row = dest / 8;
-	//col = dest % 8;
-
-	//text = text + ('a' + col); // concatenate a character according to row
-	//text = text + tostr(row); // concatenate the row as a character
-
-	//return text;
- //  return "";
 }
 
 ostream& operator<<(ostream& out, const Move& move)
