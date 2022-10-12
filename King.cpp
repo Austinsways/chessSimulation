@@ -91,12 +91,7 @@ list<Move> King::getMoves(const Board& board) const
       moves.push_back(Move(position, sideLeftDown, white));
    }
 
-
-
-
-
    // captures
-
 
    Position diagonals[8]{ sideRightUp,sideLeftUp, sideLeftDown, sideRightDown, sideRight, sideLeft, oneAhead, oneBack };
    for (const auto& diagonal : diagonals)
@@ -112,7 +107,6 @@ list<Move> King::getMoves(const Board& board) const
          }
       }
    }
-
 
    //castle
    if (nMoves == 0)
@@ -167,36 +161,6 @@ list<Move> King::getMoves(const Board& board) const
          moves.push_back(move);
       }
 
-      ////first 3 is for the three spots between rook and king, increasing or decreasing based on color
-      //bool valid = true;
-      ////we'll need to add a thing to find if the rook is there later.
-      //for (int i = 0; white ? i < -3 : i >3;white ?  i -= 1: i+=1) {
-      //    Position locationCheck(getPosition());
-      //    locationCheck.adjustRow(i);
-      //    if (!(locationCheck.isValid() && board.get(locationCheck).getLetter() == ' ')) {
-      //        valid = false;
-      //    };
-      //}
-      //if (valid) {
-      //    Position newPosition(white ? 3 : 3, white ? 0 : 7 );
-      //    Move move(position, newPosition, white);
-      //}
-
-      //
-      ////first 2 is for the three spots between rook and king, increasing or decreasing based on color
-      //valid = true;
-      ////we'll need to add a thing to find if the rook is there later.
-      //for (int i = 0; white ? i < -2 : i >2; white ? i += 1 : i -= 1) {
-      //    Position locationCheck(getPosition());
-      //    locationCheck.adjustRow(i);
-      //    if (!(locationCheck.isValid() && board.get(locationCheck).getLetter() == ' ')) {
-      //        valid = false;
-      //    };
-      //}
-      //if (valid) {
-      //    Position newPosition(white ? 7 : 7, white ? 0 : 7);
-      //    Move move(position, newPosition, white);
-      //}
    }
 
 
