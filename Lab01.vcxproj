@@ -105,11 +105,13 @@
     <ClCompile Include="piece.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="King.cpp" />
+    <ClCompile Include="queen.cpp" />
     <ClCompile Include="uiDraw.cpp" />
     <ClCompile Include="uiInteract.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="board.h" />
+    <ClInclude Include="queen.h" />
     <ClInclude Include="space.h" />
     <ClInclude Include="king.h" />
     <ClInclude Include="move.h" />
