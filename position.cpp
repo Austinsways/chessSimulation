@@ -18,3 +18,18 @@ void Position::set(int col, int row)
    else
       location = col + row * 8;
 }
+
+Position Position::operator+(const Delta& rhs)
+{
+   Position newPos(*this);
+   newPos.adjustCol(rhs.col);
+   newPos.adjustRow(rhs.row);
+   return newPos;
+}
+
+Position& Position::operator+=(const Delta& rhs)
+{
+   adjustCol(rhs.col);
+   adjustRow(rhs.row);
+   return *this;
+}

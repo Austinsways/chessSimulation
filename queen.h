@@ -25,13 +25,11 @@ public:
 
 	char getLetter() const { return 'q'; }
 	void display(ogstream gout) const {}
-	std::list<Move> getMoves(const Board& board);
+	std::list<Move> getMoves(const Board& board) const;
 	virtual std::unique_ptr<Piece> clone() const { return std::make_unique<Queen>(*this); };
 
-
-
 private:
-	void checkPossibleMove(bool& blocked, list<Move>& moves, Position possiblePosition, const Board &board) {
+	void checkPossibleMove(bool& blocked, std::list<Move>& moves, Position possiblePosition, const Board &board) const {
 		if (possiblePosition.isValid() && board.get(possiblePosition).getLetter() == ' ')
 		{
 			Move move(position, possiblePosition, white);

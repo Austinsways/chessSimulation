@@ -8,6 +8,7 @@
 #include "uiDraw.h"       // for draw*
 #include "testPawn.h"     // for Pawn unit tests
 #include "testKing.h"     // for King unit tests
+#include "testQueen.h"     // for Queen unit tests
 #include <set>            // for STD::SET
 #include <cassert>        // for ASSERT
 #include <fstream>        // for IFSTREAM
@@ -533,6 +534,8 @@ int main(int argc, char** argv)
    testPawn.run();
    TestKing testKing;
    testKing.run();
+   TestQueen testQueen;
+   testQueen.run();
 
 
    // set everything into action

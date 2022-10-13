@@ -6,6 +6,11 @@
  **************************************************/
 #pragma once
 
+struct Delta
+{
+   int col;
+   int row;
+};
 
 /**************************************************
  * POSITION
@@ -31,6 +36,8 @@ public:
    void adjustRow(int delta) { set(getCol(), getRow() + delta); }
    void adjustCol(int delta) { set(getCol() + delta, getRow()); }
    bool operator==(const Position& rhs) { return location == rhs.getLocation(); }
+   Position operator+(const Delta& rhs);
+   Position& operator+=(const Delta& rhs);
 
 private:
    char location;

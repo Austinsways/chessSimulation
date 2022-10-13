@@ -40,15 +40,12 @@ public:
 	virtual std::list<Move> getMoves(const Board& board) const = 0;
 	virtual std::unique_ptr<Piece> clone() const = 0;
 
-	//virtual bool operator==(char rhs) { return getLetter() == rhs; }
-	//virtual bool operator!=(char rhs) { return !(*this == rhs); }
-
 protected:
 	Position position;
 	bool white;
 	int nMoves;
 	int lastMove;
-
+	std::list<Move> getSlideMoves(const Board& board, const Delta& delta) const;
 };
 
 bool operator==(const Piece& lhs, char rhs);

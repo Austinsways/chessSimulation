@@ -8,6 +8,7 @@
 
 #include <cassert>
 #include <set>
+#include <string>
 
 #include "pawn.h"
 #include "board.h"

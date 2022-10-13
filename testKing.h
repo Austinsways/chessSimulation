@@ -8,10 +8,14 @@
 
 #include <cassert>
 #include <set>
+#include <string>
 
 #include "king.h"
+#include "pawn.h"
 #include "board.h"
 #include "rook.h"
+
+using namespace std;
 
 class TestKing
 {
@@ -157,9 +161,12 @@ private:
       King king;
       king.position = Position(4, 0); // e1
       king.nMoves = 1;
+      board.assign(king);
 
       Rook rook1(0, 0, true);//a1
+      board.assign(rook1);
       Rook rook2(7, 0, true);//h1
+      board.assign(rook2);
 
       // exercise
       auto moves = king.getMoves(board);
@@ -182,11 +189,14 @@ private:
 
       King king;
       king.position = Position(4, 0); // e1
+      board.assign(king);
 
       Rook rook1(1, 0, true);//a1
       rook1.nMoves = 1;
+      board.assign(rook1);
       Rook rook2(7, 0, true);//h1
-      rook1.nMoves = 1;
+      rook2.nMoves = 1;
+      board.assign(rook2);
 
       // exercise
       auto moves = king.getMoves(board);
@@ -210,14 +220,19 @@ private:
       King king;
       king.position = Position(4, 0); // e1
       king.nMoves = 0;
+      board.assign(king);
 
       Rook rook1(1, 0, true);//a1
       rook1.nMoves = 0;
+      board.assign(rook1);
       Rook rook2(7, 0, true);//h1
       rook2.nMoves = 0;
+      board.assign(rook2);
 
-      Pawn pawn4(1, 0, false);//b1
-      Pawn pawn5(6, 0, false);//g2
+      Pawn pawn1(1, 0, false);//b1
+      board.assign(pawn1);
+      Pawn pawn2(6, 0, false);//g2
+      board.assign(pawn2);
 
       // exercise
       auto moves = king.getMoves(board);
@@ -263,5 +278,4 @@ private:
 
       // cleanup
    }
-
 };
