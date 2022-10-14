@@ -29,4 +29,16 @@ public:
    std::list<Move> getMoves(const Board& board) const { return std::list<Move>(); }
    virtual std::unique_ptr<Piece> clone() const { return std::make_unique<Knight>(*this); };
    virtual void draw(ogstream& gout) const;
+private:
+	void checkPossibleMove(bool& blocked, std::list<Move>& moves, Position possiblePosition, const Board& board) const {
+		//since the knight can capture, the space can be empty or an enemy piece. 
+		if (possiblePosition.isValid() && (board.get(possiblePosition).getLetter() == ' ' || board.get(possiblePosition).isWhite() ? false : true))
+		{
+			Move move(position, possiblePosition, white);
+			moves.push_back(Move(position, possiblePosition, white));
+		}
+		else {
+			blocked = true;
+		};
+	};
 };
