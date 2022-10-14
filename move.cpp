@@ -12,10 +12,12 @@
 
 using namespace std;
 
+/**************************************************
+ * MOVE :: GET TEXT
+ * Get the Smith-Notation for the move
+ **************************************************/
 string Move::getText() const
 {
-   // TODO
-
 	string text = "";
 	text+=(char)('a' + source.getCol());
 	text += (char)('1' + source.getRow());

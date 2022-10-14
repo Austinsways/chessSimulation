@@ -13,6 +13,10 @@
 
 using namespace std;
 
+/**************************************************
+ * PAWN :: GET MOVES
+ * Get all possible moves for the Pawn
+ **************************************************/
 list<Move> Pawn::getMoves(const Board& board) const
 {
    list<Move> moves;

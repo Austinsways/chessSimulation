@@ -4,7 +4,13 @@
  *    Lehi Lopez
  *    Eddie McConkie
  **************************************************/
+
+#include <list>
+
+#include "uiDraw.h"
+#include "move.h"
 #include "piece.h"
+#include "board.h"
 
 using namespace::std;
 class TestKing;
@@ -21,4 +27,5 @@ public:
    void display(ogstream gout) const {}
    std::list<Move> getMoves(const Board& board) const { return std::list<Move>(); }
    virtual std::unique_ptr<Piece> clone() const { return std::make_unique<Rook>(*this); };
+   virtual void draw(ogstream& gout) const;
 };

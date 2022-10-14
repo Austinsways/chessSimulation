@@ -12,6 +12,10 @@
 
 using namespace std;
 
+/**************************************************
+ * KING :: GET MOVES
+ * Get all possible moves for the King
+ **************************************************/
 list<Move> King::getMoves(const Board& board) const
 {
    list<Move> moves;

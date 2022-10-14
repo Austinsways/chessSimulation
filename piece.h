@@ -11,7 +11,6 @@
 
 #include "uiDraw.h"
 #include "move.h"
-//#include "board.h"
 #include "position.h"
 
 class Board;
@@ -41,6 +40,7 @@ public:
 	virtual void display(ogstream gout) const = 0;
 	virtual std::list<Move> getMoves(const Board& board) const = 0;
 	virtual std::unique_ptr<Piece> clone() const = 0;
+	virtual void draw(ogstream& gout) const = 0;
 
 protected:
 	Position position;

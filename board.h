@@ -35,6 +35,7 @@ public:
    void move(const Move& move);
    void setCurrentMove(int currentMove) { this->currentMove = currentMove; }
    void assign(const Piece& piece) { board[piece.getPosition().getLocation()] = piece.clone(); }
+   void draw() const;
 
 private:
    std::array<std::unique_ptr<Piece>, 64> board;
