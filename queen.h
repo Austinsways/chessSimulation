@@ -21,7 +21,7 @@ public:
 	friend TestQueen;
 
 	Queen() : Piece() {}
-	Queen(int row, int col, bool white) : Piece(row, col, white) {}
+	Queen(int col, int row, bool white) : Piece(col, row, white) {}
 
 	char getLetter() const { return 'q'; }
 	void display(ogstream gout) const {}

@@ -11,7 +11,7 @@ class Space : public Piece
 public:
 
 	Space() : Piece() {}
-	Space(int row, int col, bool white) : Piece(row, col, white) {}
+	Space(int col, int row, bool white) : Piece(col, row, white) {}
 
 	char getLetter() const { return ' '; }
 	void display(ogstream gout) const {}

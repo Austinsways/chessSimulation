@@ -15,7 +15,7 @@ public:
    friend TestKing;
 
    Rook() : Piece() {}
-   Rook(int row, int col, bool white) : Piece(row, col, white) {}
+   Rook(int col, int row, bool white) : Piece(col, row, white) {}
 
    char getLetter() const { return 'r'; }
    void display(ogstream gout) const {}

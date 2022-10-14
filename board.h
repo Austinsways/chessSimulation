@@ -32,13 +32,13 @@ public:
    const Piece& get(const Position& pos) const;
    void reset();
    void clear();
-   void move(const Move& move) {}
+   void move(const Move& move);
    void setCurrentMove(int currentMove) { this->currentMove = currentMove; }
    void assign(const Piece& piece) { board[piece.getPosition().getLocation()] = piece.clone(); }
 
 private:
    std::array<std::unique_ptr<Piece>, 64> board;
    int currentMove;
-   void swap(Position pos1, Position pos2) {}
+   void moveTo(Position pos1, Position pos2);
 };
 

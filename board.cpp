@@ -5,6 +5,9 @@
  *    Eddie McConkie
  **************************************************/
 
+#include <cassert>
+#include <memory>
+
 #include "board.h"
 #include "space.h"
 #include "pawn.h"
@@ -94,4 +97,86 @@ void Board::clear()
       int col = i % 8;
       board[i] = make_unique<Space>(Space(row, col, i < 16));
    }
+}
+
+/**************************************************
+ * BOARD :: MOVE
+ * Apply a move to the board
+ **************************************************/
+void Board::move(const Move& move)
+{
+   Position src = move.getSrc();
+   Position dest = move.getDest();
+   if (!src.isValid() || !dest.isValid())
+      throw "One of the positions is invalid";
+
+   if (get(src) == ' ')
+      throw "Cannot perform a move on a space";
+
+   board[src.getLocation()]->incrementNMoves();
+   moveTo(src, dest);
+
+   // Check for En Passant
+   if (move.getEnPassant())
+   {
+      Position sides[2]{ src + Delta{ -1, 0}, src + Delta{1, 0} };
+      bool didEnpassant = false;
+      for (const Position& side : sides)
+      {
+         if (side.isValid())
+         {
+            const Piece& piece = get(side);
+            if (piece == 'p' && piece.isWhite() != move.isWhiteMove())
+            {
+               board[side.getLocation()] = make_unique<Space>(Space());
+               didEnpassant = true;
+            }
+         }
+      }
+
+      if (!didEnpassant)
+         throw "The was not a pawn to En Passant";
+
+   }
+
+   // Check promotion to Queen
+   if (move.getPromotion() == 'Q')
+   {
+      board[dest.getLocation()] = make_unique<Queen>(Queen(dest.getCol(), dest.getRow(), move.isWhiteMove()));
+   }
+
+   // Check king-side castle
+   if (move.getCastleK())
+   {
+      Position corner = src + Delta{ 3, 0 };
+      Position castlePosition = src + Delta{ 1, 0 };
+      if (!corner.isValid() || get(corner) != 'r')
+         throw "Cannot castle, rook is in wrong position";
+
+      moveTo(corner, castlePosition);
+   }
+
+   // Check queen-side castle
+   if (move.getCastleQ())
+   {
+      Position corner = src + Delta{ -4, 0 };
+      Position castlePosition = src + Delta{ -1, 0 };
+      if (!corner.isValid() || get(corner) != 'r')
+         throw "Cannot castle, rook is in wrong position";
+
+      moveTo(corner, castlePosition);
+   }
+
+   currentMove += 1;
+}
+
+/**************************************************
+ * BOARD :: MOVE TO
+ * Move a piece from source to destination
+ **************************************************/
+void Board::moveTo(Position src, Position dest)
+{
+   board[dest.getLocation()] = get(src).clone();
+   board[dest.getLocation()]->setPosition(dest);
+   board[src.getLocation()] = make_unique<Space>(Space()); // Use non-default ctor if there's bugs...?
 }

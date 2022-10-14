@@ -20,7 +20,7 @@ public:
    friend TestKing;
 
    King() : Piece() {}
-   King(int row, int col, bool white) : Piece(row, col, white) {}
+   King(int col, int row, bool white) : Piece(col, row, white) {}
 
    char getLetter() const { return 'k'; }
    void display(ogstream gout) const {}

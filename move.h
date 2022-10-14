@@ -36,6 +36,7 @@ public:
    bool getEnPassant() const { return enpassant; }
    bool getCastleK() const { return castleK; }
    bool getCastleQ() const { return castleQ; }
+   bool isWhiteMove() const { return isWhite; }
    void setPromotion(char piece) { this->piece = piece; }
    void setCapture(char capture) { this->capture = capture; }
    void setEnPassant(bool enpassant) { this->enpassant = enpassant; }
