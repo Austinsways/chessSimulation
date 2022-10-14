@@ -51,6 +51,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       King king;
       king.white = true;
@@ -75,6 +76,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       King king;
       king.white = true;
@@ -116,6 +118,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       King king;
       king.position = Position(4, 5); // e6
@@ -157,6 +160,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       King king;
       king.position = Position(4, 0); // e1
@@ -186,6 +190,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       King king;
       king.position = Position(4, 0); // e1
@@ -216,6 +221,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       King king;
       king.position = Position(4, 0); // e1
@@ -252,6 +258,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       King king;
       king.position = Position(4, 0); // e1

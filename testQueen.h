@@ -31,6 +31,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       Queen queen;
       queen.white = true;
@@ -72,6 +73,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       Queen queen;
       queen.white = true;
@@ -113,6 +115,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       Queen queen;
       queen.white = true;

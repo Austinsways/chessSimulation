@@ -48,6 +48,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       Pawn pawn;
       pawn.white = true;
@@ -95,6 +96,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       Pawn pawn;
       pawn.white = true;
@@ -135,6 +137,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       Pawn pawn;
       pawn.white = true;
@@ -175,6 +178,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       Pawn pawn;
       pawn.white = true;
@@ -236,6 +240,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
       board.setCurrentMove(2);
 
       Pawn pawn;
@@ -300,6 +305,7 @@ private:
    {
       // setup
       Board board;
+      board.clear();
 
       Pawn pawn;
       pawn.white = true;
