@@ -110,7 +110,9 @@
     <ClCompile Include="uiInteract.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bishop.h" />
     <ClInclude Include="board.h" />
+    <ClInclude Include="knight.h" />
     <ClInclude Include="queen.h" />
     <ClInclude Include="space.h" />
     <ClInclude Include="king.h" />

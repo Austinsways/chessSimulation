@@ -5,7 +5,7 @@
  *    Eddie McConkie
  **************************************************/
 
-#include "Queen.h"
+#include "queen.h"
 #include "move.h"
 
 #include <list>

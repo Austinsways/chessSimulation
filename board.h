@@ -11,7 +11,6 @@
 
 #include "uiDraw.h"
 #include "piece.h"
-#include "pawn.h"
 #include "position.h"
 #include "move.h"
 
@@ -31,7 +30,8 @@ public:
    bool whiteTurn() const { return currentMove % 2 == 1; }
    void display(const Position& hover, const Position& selected) const {}
    const Piece& get(const Position& pos) const;
-   void reset() {}
+   void reset();
+   void clear();
    void move(const Move& move) {}
    void setCurrentMove(int currentMove) { this->currentMove = currentMove; }
    void assign(const Piece& piece) { board[piece.getPosition().getLocation()] = piece.clone(); }
