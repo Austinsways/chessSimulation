@@ -69,7 +69,7 @@ private:
     }  // cleanup
 
     /**************************************************
-     * GET MOVES BLOCKED - Knight can move in all directions
+     * GET MOVES BLOCKED - Knight is blocked in all directions
      * +---a-b-c-d-e-f-g-h---+
      * |                     |
      * 8                     8
@@ -126,7 +126,7 @@ private:
     }
 
     /**************************************************
-     * GET MOVES CAPTURE - Knight can move in all directions
+     * GET MOVES CAPTURE - Knight can capture in all directions
      * +---a-b-c-d-e-f-g-h---+
      * |                     |
      * 8                     8

@@ -115,6 +115,7 @@
   <ItemGroup>
     <ClInclude Include="bishop.h" />
     <ClInclude Include="board.h" />
+    <ClInclude Include="testBishop.h" />
     <ClInclude Include="testRook.h" />
     <ClInclude Include="testKnight.h" />
     <ClInclude Include="knight.h" />
