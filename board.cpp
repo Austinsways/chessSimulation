@@ -16,7 +16,14 @@
 #include "bishop.h"
 #include "queen.h"
 #include "king.h"
+#include "uiInteract.h"
+
+//#include <stdio.h>
+//#include <stdlib.h>
+#include <GL/glut.h> 
+
 using namespace std;
+
 
 /**************************************************
  * BOARD CONSTRUCTOR
@@ -61,25 +68,25 @@ void Board::reset()
       switch (setup[i])
       {
       case 'p':
-         board[i] = make_unique<Pawn>(Pawn(row, col, i < 16));
+         board[i] = make_unique<Pawn>(Pawn(col, row, i < 16));
          break;
       case 'r':
-         board[i] = make_unique<Rook>(Rook(row, col, i < 16));
+         board[i] = make_unique<Rook>(Rook(col, row, i < 16));
          break;
       case 'n':
-         board[i] = make_unique<Knight>(Knight(row, col, i < 16));
+         board[i] = make_unique<Knight>(Knight(col, row, i < 16));
          break;
       case 'b':
-         board[i] = make_unique<Bishop>(Bishop(row, col, i < 16));
+         board[i] = make_unique<Bishop>(Bishop(col, row, i < 16));
          break;
       case 'q':
-         board[i] = make_unique<Queen>(Queen(row, col, i < 16));
+         board[i] = make_unique<Queen>(Queen(col, row, i < 16));
          break;
       case 'k':
-         board[i] = make_unique<King>(King(row, col, i < 16));
+         board[i] = make_unique<King>(King(col, row, i < 16));
          break;
       default:
-         board[i] = make_unique<Space>(Space(row, col, false));
+         board[i] = make_unique<Space>(Space(col, row, false));
          break;
       }
    }
@@ -179,4 +186,80 @@ void Board::moveTo(Position src, Position dest)
    board[dest.getLocation()] = get(src).clone();
    board[dest.getLocation()]->setPosition(dest);
    board[src.getLocation()] = make_unique<Space>(Space()); // Use non-default ctor if there's bugs...?
+}
+
+void Board::glColor(const int* rgb) const
+{
+    glColor3f((GLfloat)(rgb[0] / 256.0),
+        (GLfloat)(rgb[1] / 256.0),
+        (GLfloat)(rgb[2] / 256.0));
+}
+
+void Board::draw(Interface* pUI) const {
+    // get ready to draw
+
+    glBegin(GL_QUADS);
+    const int RGB_BLACK_SQUARE[] = { 165, 42, 42 };
+    const int RGB_WHITE_SQUARE[] = { 210, 180, 140 };
+    for (int row = 0; row < 8; row++)
+        for (int col = 0; col < 8; col++)
+        {
+            // set the checker-board color
+            if ((row + col) % 2 == 0)
+                glColor(RGB_BLACK_SQUARE);
+            else
+                glColor(RGB_WHITE_SQUARE);
+
+            // draw the square
+            glVertex2i((GLint)((col + 0) * 32 + 1),
+                (GLint)((row + 0) * 32 + 1));
+            glVertex2i((GLint)((col + 1) * 32 - 1),
+                (GLint)((row + 0) * 32 + 1));
+            glVertex2i((GLint)((col + 1) * 32 - 1),
+                (GLint)((row + 1) * 32 - 1));
+            glVertex2i((GLint)((col + 0) * 32 + 1),
+                (GLint)((row + 1) * 32 - 1));
+        }
+
+    ogstream gout;
+
+    // draw any selections
+    gout.drawHover(pUI->getHoverPosition());
+    gout.drawSelected(pUI->getSelectPosition());
+    int debug = pUI->getSelectPosition();
+    if (pUI->getSelectPosition() >= 0 && pUI->getSelectPosition() <= 63) {
+        // draw the possible moves
+        unique_ptr<Piece> selected = board[pUI->getSelectPosition()].get()->clone();
+        list<Move> possible = board[pUI->getSelectPosition()]->getMoves(*this);
+        for (auto move : possible)
+            gout.drawPossible(move.getDest().getLocation());
+    }
+    // done
+    glEnd();
+    for (auto &spot : board )
+    {
+        spot->draw();
+    }
+}
+
+void Board::checkWin() {
+    bool blackWin = true;
+    bool whiteWin = true;
+    for (auto &piece : board) {
+        if (piece->getLetter() == 'k') {
+            if (piece->isWhite()) {
+                blackWin = false;
+            }
+            else {
+                whiteWin = false;
+            }
+        }
+    }
+
+    if (blackWin) {
+        exit(0);
+    }
+    if (whiteWin) {
+        exit(0);
+    }
 }

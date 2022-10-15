@@ -24,6 +24,10 @@ public:
    {
       set(col, row);
    }
+   Position(int desiredLocation) : squareWidth(50), squareHeight(50)
+   {
+       this->location = desiredLocation;
+   }
    int getLocation() const { return location; }
    int getRow() const { return (int)location / 8; }
    int getCol() const { return (int)location % 8; }

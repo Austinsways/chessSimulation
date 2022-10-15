@@ -25,7 +25,7 @@ public:
 
    char getLetter() const { return 'r'; }
    void display(ogstream gout) const {}
-   std::list<Move> getMoves(const Board& board) const { return std::list<Move>(); }
+   std::list<Move> getMoves(const Board& board) const;
    virtual std::unique_ptr<Piece> clone() const { return std::make_unique<Rook>(*this); };
-   virtual void draw(ogstream& gout) const;
+   void draw() const;
 };

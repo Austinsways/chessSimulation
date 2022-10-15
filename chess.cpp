@@ -11,6 +11,7 @@
 #include "testKing.h"     // for King unit tests
 #include "testQueen.h"    // for Queen unit tests
 #include "board.h"
+#include "game.h"
 
 #include <set>            // for STD::SET
 #include <cassert>        // for ASSERT
@@ -484,16 +485,16 @@ using namespace std;
 /**************************************************
  * GAME
  **************************************************/
-class Game
-{
-public:
-   Game() {}
-   void advance(Interface* pUI) {}
-   void draw(Interface* pUI) {}
-
-private:
-   Board board;
-};
+//class Game
+//{
+//public:
+//   Game() {}
+//   void advance(Interface* pUI) {}
+//   void draw(Interface* pUI) {}
+//
+//private:
+//   Board board;
+//};
 
 /*************************************
  * All the interesting work happens here, when
@@ -506,6 +507,7 @@ void callBack(Interface* pUI, void* p)
 {
    Game* game = (Game*)p;
    game->advance(pUI);
+   game->checkWin();
    game->draw(pUI);
 }
 

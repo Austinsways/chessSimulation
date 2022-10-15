@@ -28,7 +28,7 @@ public:
 	void display(ogstream gout) const {}
 	std::list<Move> getMoves(const Board& board) const;
 	virtual std::unique_ptr<Piece> clone() const { return std::make_unique<Queen>(*this); };
-	virtual void draw(ogstream& gout) const;
+	void draw() const;
 
 private:
 	void checkPossibleMove(bool& blocked, std::list<Move>& moves, Position possiblePosition, const Board &board) const {

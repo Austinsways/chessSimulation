@@ -13,9 +13,9 @@
 #include "piece.h"
 #include "position.h"
 #include "move.h"
+#include "uiInteract.h"
 
 class TestBoard;
-
 /**************************************************
  * BOARD
  * The chess board
@@ -35,11 +35,14 @@ public:
    void move(const Move& move);
    void setCurrentMove(int currentMove) { this->currentMove = currentMove; }
    void assign(const Piece& piece) { board[piece.getPosition().getLocation()] = piece.clone(); }
-   void draw() const;
+   void draw(Interface* pUI) const;
+   void checkWin();
 
 private:
    std::array<std::unique_ptr<Piece>, 64> board;
    int currentMove;
    void moveTo(Position pos1, Position pos2);
+   void glColor(const int* rgb) const;
+   
 };
 

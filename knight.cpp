@@ -3,8 +3,9 @@
 #include <list>
 
 
-list<Move> Knight::getMoves(const Board& board) const {
-    list<Move> moves;
+std::list<Move> Knight::getMoves(const Board& board) const {
+
+    std::list<Move> moves;
     Delta deltas[8]{ {2,1}, {2,-1}, {1,2}, {1,-2}, {-2,1}, {-2,-1}, {-1, 2}, {-1,-2} };
     for (auto& delta : deltas)
     {
@@ -17,4 +18,18 @@ list<Move> Knight::getMoves(const Board& board) const {
         
     }
     return moves;
+}
+
+void Knight::draw() const {
+    Rect rectangles[] =
+    {
+       {-7,3,  -3,6,  -1,3,  -5,0},  // muzzle
+       {-2,6,  -2,8,   0,8,   0,3},  // head
+       {-3,6,   3,6,   6,1,   1,1},  // main
+       { 6,1,   1,1,  -5,-5,  5,-5}, // body
+       { 6,-6, -6,-6, -6,-8,  6,-8}  // base
+
+    };
+
+    drawPiece(xFromPosition(position.getLocation()), yFromPosition(position.getLocation()), white, rectangles, 5);
 }

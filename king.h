@@ -12,8 +12,10 @@
 #include "move.h"
 #include "piece.h"
 #include "board.h"
+#include <GL/glut.h> 
 
 class TestKing;
+
 
 class King : public Piece
 {
@@ -27,5 +29,5 @@ public:
    void display(ogstream gout) const {}
    std::list<Move> getMoves(const Board& board) const;
    virtual std::unique_ptr<Piece> clone() const { return std::make_unique<King>(*this); };
-   virtual void draw(ogstream& gout) const;
+   void draw() const;
 };
