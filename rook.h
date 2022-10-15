@@ -14,6 +14,7 @@
 
 using namespace::std;
 class TestKing;
+class TestRook;
 
 class Rook : public Piece
 {

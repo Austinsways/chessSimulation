@@ -83,21 +83,21 @@ private:
       king.position = Position(4, 5); // e5
       board.assign(king);
 
-      Pawn pawn1(3, 6, true);
+      Pawn pawn1(3, 5, true);
       board.assign(pawn1);
-      Pawn pawn2(4, 6, true);
+      Pawn pawn2(4, 5, true);
       board.assign(pawn2);
-      Pawn pawn3(5, 6, true);
+      Pawn pawn3(5, 5, true);
       board.assign(pawn3);
-      Pawn pawn4(3, 5, true);
+      Pawn pawn4(3, 4, true);
       board.assign(pawn4);
-      Pawn pawn5(5, 5, true);
+      Pawn pawn5(5, 4, true);
       board.assign(pawn5);
-      Pawn pawn6(3, 4, true);
+      Pawn pawn6(3, 3, true);
       board.assign(pawn6);
-      Pawn pawn7(4, 4, true);
+      Pawn pawn7(4, 3, true);
       board.assign(pawn7);
-      Pawn pawn8(5, 4, true);
+      Pawn pawn8(5, 3, true);
       board.assign(pawn8);
 
       // exercise
@@ -125,21 +125,21 @@ private:
       king.white = true;
       board.assign(king);
 
-      Pawn pawn1(3, 6, false);
+      Pawn pawn1(3, 5, false);
       board.assign(pawn1);
-      Pawn pawn2(4, 6, false);
+      Pawn pawn2(4, 5, false);
       board.assign(pawn2);
-      Pawn pawn3(5, 6, false);
+      Pawn pawn3(5, 5, false);
       board.assign(pawn3);
-      Pawn pawn4(3, 5, false);
+      Pawn pawn4(3, 4, false);
       board.assign(pawn4);
-      Pawn pawn5(5, 5, false);
+      Pawn pawn5(5, 4, false);
       board.assign(pawn5);
-      Pawn pawn6(3, 4, false);
+      Pawn pawn6(3, 3, false);
       board.assign(pawn6);
-      Pawn pawn7(4, 4, false);
+      Pawn pawn7(4, 3, false);
       board.assign(pawn7);
-      Pawn pawn8(5, 4, false);
+      Pawn pawn8(5, 3, false);
       board.assign(pawn8);
 
       // exercise
