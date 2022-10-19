@@ -14,8 +14,14 @@ std::list<Move> Knight::getMoves(const Board& board) const {
         possiblePosition.adjustCol(delta.col);
         possiblePosition.adjustRow(delta.row);
         bool blocked = false; 
-        checkPossibleMove(blocked, moves, possiblePosition, board); 
-        
+        if (possiblePosition.isValid() && (board.get(possiblePosition).getLetter() == ' ' || board.get(possiblePosition).isWhite() ? true : false))
+        {
+            Move move(position, possiblePosition, white);
+            moves.push_back(Move(position, possiblePosition, white));
+        }
+        else {
+            blocked = true;
+        };
     }
     return moves;
 }

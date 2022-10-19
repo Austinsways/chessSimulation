@@ -25,42 +25,49 @@ void Game::advance(Interface* pUI) {
 
 	//if start position has been initiated and we could potentially select a move...
 	else {
-		if (pUI->getSelectPosition() != startPosition) {
-			desiredPosition = pUI->getSelectPosition();
-		}
-		else {
-			return;
-		}
-		Position startingPosition(startPosition);
-		if (board.get(startingPosition).isWhite() != whiteTurn) {
-			return;
-		}
-		Position movingPosition(desiredPosition);
-		Move desiredMovement(startingPosition, movingPosition, board.get(startingPosition).isWhite());
-		//check if the piece is attempting to capture by seeing if the pieces are the same color
-		if (board.get(movingPosition).isWhite() != board.get(startingPosition).isWhite()) {
-			//if they're not the same color, allow a capture. the getmoves function will decide if the piece can actually capture or not. 
-			desiredMovement.setCapture(board.get(desiredPosition).getLetter());
-		}
+		Position colorCheck(startPosition);
+		if (board.get(colorCheck).isWhite() == whiteTurn) {
 
-		list<Move> moves = board.get(startingPosition).getMoves(board);
-		bool valid = false;
-		for (auto move : moves)
-		{
-			if (move.getText() == desiredMovement.getText()) {
-				valid = true;
+			if (pUI->getSelectPosition() != startPosition) {
+				desiredPosition = pUI->getSelectPosition();
+			}
+			else {
+				return;
+			}
+			Position startingPosition(startPosition);
+			if (board.get(startingPosition).isWhite() != whiteTurn) {
+				return;
+			}
+			Position movingPosition(desiredPosition);
+			Move desiredMovement(startingPosition, movingPosition, board.get(startingPosition).isWhite());
+			//check if the piece is attempting to capture by seeing if the pieces are the same color
+			if (board.get(movingPosition).isWhite() != board.get(startingPosition).isWhite()) {
+				//if they're not the same color, allow a capture. the getmoves function will decide if the piece can actually capture or not. 
+				desiredMovement.setCapture(board.get(desiredPosition).getLetter());
+			}
+
+			list<Move> moves = board.get(startingPosition).getMoves(board);
+			bool valid = false;
+			for (auto move : moves)
+			{
+				if (move.getText() == desiredMovement.getText()) {
+					valid = true;
+				}
+			}
+
+
+			if (valid) {
+				board.move(desiredMovement);
+				startPosition = -2;
+				//switch turns each time a player moves.
+				whiteTurn = whiteTurn ? false : true;
+			}
+			else {
+				startPosition = pUI->getSelectPosition();
 			}
 		}
-
-
-		if (valid) {
-			board.move(desiredMovement);
-			startPosition = -2;
-			//switch turns each time a player moves.
-			whiteTurn = whiteTurn ? false : true; 
-		}
 		else {
-			startPosition = pUI->getSelectPosition();
+			startPosition = -2;
 		}
 	}
 

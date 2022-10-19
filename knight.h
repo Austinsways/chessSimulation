@@ -19,26 +19,15 @@ class TestKnight;
 class Knight : public Piece
 {
 public:
-   friend TestKnight;
+	friend TestKnight;
 
-   Knight() : Piece() {}
-   Knight(int col, int row, bool white) : Piece(col, row, white) {}
+	Knight() : Piece() {}
+	Knight(int col, int row, bool white) : Piece(col, row, white) {}
 
-   char getLetter() const { return 'n'; }
-   void display(ogstream gout) const {}
-   std::list<Move> getMoves(const Board& board) const;
-   virtual std::unique_ptr<Piece> clone() const { return std::make_unique<Knight>(*this); };
-   void draw() const;
+	char getLetter() const { return 'n'; }
+	void display(ogstream gout) const {}
+	std::list<Move> getMoves(const Board& board) const;
+	virtual std::unique_ptr<Piece> clone() const { return std::make_unique<Knight>(*this); };
+	void draw() const;
 private:
-	void checkPossibleMove(bool& blocked, std::list<Move>& moves, Position possiblePosition, const Board& board) const {
-		//since the knight can capture, the space can be empty or an enemy piece. 
-		if (possiblePosition.isValid() && (board.get(possiblePosition).getLetter() == ' ' || board.get(possiblePosition).isWhite() ? false : true))
-		{
-			Move move(position, possiblePosition, white);
-			moves.push_back(Move(position, possiblePosition, white));
-		}
-		else {
-			blocked = true;
-		};
-	};
 };

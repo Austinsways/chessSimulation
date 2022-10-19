@@ -540,12 +540,12 @@ int main(int argc, char** argv)
       //readFile(argv[1], board);
 #endif // !_WIN32
 
-   TestPawn testPawn;
+   /*TestPawn testPawn;
    testPawn.run();
    TestKing testKing;
    testKing.run();
    TestQueen testQueen;
-   testQueen.run();
+   testQueen.run();*/
 
    Game game;
 
