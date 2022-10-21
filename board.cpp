@@ -196,32 +196,9 @@ void Board::glColor(const int* rgb) const
 }
 
 void Board::draw(Interface* pUI) const {
-    // get ready to draw
-
-    glBegin(GL_QUADS);
-    const int RGB_BLACK_SQUARE[] = { 165, 42, 42 };
-    const int RGB_WHITE_SQUARE[] = { 210, 180, 140 };
-    for (int row = 0; row < 8; row++)
-        for (int col = 0; col < 8; col++)
-        {
-            // set the checker-board color
-            if ((row + col) % 2 == 0)
-                glColor(RGB_BLACK_SQUARE);
-            else
-                glColor(RGB_WHITE_SQUARE);
-
-            // draw the square
-            glVertex2i((GLint)((col + 0) * 32 + 1),
-                (GLint)((row + 0) * 32 + 1));
-            glVertex2i((GLint)((col + 1) * 32 - 1),
-                (GLint)((row + 0) * 32 + 1));
-            glVertex2i((GLint)((col + 1) * 32 - 1),
-                (GLint)((row + 1) * 32 - 1));
-            glVertex2i((GLint)((col + 0) * 32 + 1),
-                (GLint)((row + 1) * 32 - 1));
-        }
-
     ogstream gout;
+
+    gout.drawBoard();
 
     // draw any selections
     gout.drawHover(pUI->getHoverPosition());
@@ -229,13 +206,11 @@ void Board::draw(Interface* pUI) const {
     int debug = pUI->getSelectPosition();
     if (pUI->getSelectPosition() >= 0 && pUI->getSelectPosition() <= 63) {
         // draw the possible moves
-        unique_ptr<Piece> selected = board[pUI->getSelectPosition()].get()->clone();
         list<Move> possible = board[pUI->getSelectPosition()]->getMoves(*this);
         for (auto move : possible)
             gout.drawPossible(move.getDest().getLocation());
     }
-    // done
-    glEnd();
+    
     for (auto &spot : board )
     {
         spot->draw();

@@ -80,7 +80,7 @@ private:
 
       King king;
       king.white = true;
-      king.position = Position(4, 5); // e5
+      king.position = Position(4, 4); // e5
       board.assign(king);
 
       Pawn pawn1(3, 5, true);
@@ -121,7 +121,7 @@ private:
       board.clear();
 
       King king;
-      king.position = Position(4, 5); // e6
+      king.position = Position(4, 4); // e6
       king.white = true;
       board.assign(king);
 
