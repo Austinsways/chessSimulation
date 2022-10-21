@@ -13,15 +13,24 @@ std::list<Move> Knight::getMoves(const Board& board) const {
         Position possiblePosition(position);
         possiblePosition.adjustCol(delta.col);
         possiblePosition.adjustRow(delta.row);
-        bool blocked = false; 
-        if (possiblePosition.isValid() && (board.get(possiblePosition).getLetter() == ' ' || board.get(possiblePosition).isWhite() ? true : false))
-        {
-            Move move(position, possiblePosition, white);
-            moves.push_back(Move(position, possiblePosition, white));
-        }
-        else {
+        //bool blocked = false; 
+        if (possiblePosition.isValid() && (board.get(possiblePosition).getLetter() == ' ' || board.get(possiblePosition).isWhite() != this->isWhite()))
+            {
+                Move move(position, possiblePosition, white);
+                if (board.get(possiblePosition).getLetter() != ' ') {
+                    move.setCapture(board.get(possiblePosition).getLetter());
+                }
+                moves.push_back(move);
+            }
+        /*if (board.get(possiblePosition).getLetter() != ' ' && board.get(possiblePosition).isWhite() != white)
+            {
+                Move move(position, possiblePosition, white);
+                move.setCapture(board.get(possiblePosition).getLetter());
+
+            }*/
+        /*else {
             blocked = true;
-        };
+        };*/
     }
     return moves;
 }
