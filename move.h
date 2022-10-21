@@ -59,8 +59,3 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& out, const Move& move);
-
-//std::istream& operator>>(std::istream& in, Move& move)
-//{
-//   return in;
-//}

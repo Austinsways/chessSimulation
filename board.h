@@ -42,7 +42,5 @@ private:
    std::array<std::unique_ptr<Piece>, 64> board;
    int currentMove;
    void moveTo(Position pos1, Position pos2);
-   void glColor(const int* rgb) const;
-   
 };
 

@@ -188,13 +188,6 @@ void Board::moveTo(Position src, Position dest)
    board[src.getLocation()] = make_unique<Space>(Space()); // Use non-default ctor if there's bugs...?
 }
 
-void Board::glColor(const int* rgb) const
-{
-    glColor3f((GLfloat)(rgb[0] / 256.0),
-        (GLfloat)(rgb[1] / 256.0),
-        (GLfloat)(rgb[2] / 256.0));
-}
-
 void Board::draw(Interface* pUI) const {
     ogstream gout;
 
@@ -213,7 +206,7 @@ void Board::draw(Interface* pUI) const {
     
     for (auto &spot : board )
     {
-        spot->draw();
+        spot->draw(gout);
     }
 }
 
