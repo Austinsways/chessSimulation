@@ -16,10 +16,11 @@
 #include "bishop.h"
 #include "queen.h"
 #include "king.h"
+#include "game.h"
 #include "uiInteract.h"
 
-//#include <stdio.h>
-//#include <stdlib.h>
+ //#include <stdio.h>
+ //#include <stdlib.h>
 #include <GL/glut.h> 
 
 using namespace std;
@@ -120,7 +121,6 @@ void Board::move(const Move& move)
    if (get(src) == ' ')
       throw "Cannot perform a move on a space";
 
-   board[src.getLocation()]->incrementNMoves();
    moveTo(src, dest);
 
    // Check for En Passant
@@ -174,6 +174,7 @@ void Board::move(const Move& move)
       moveTo(corner, castlePosition);
    }
 
+   board[dest.getLocation()]->setMove(currentMove);
    currentMove += 1;
 }
 
@@ -185,49 +186,39 @@ void Board::moveTo(Position src, Position dest)
 {
    board[dest.getLocation()] = get(src).clone();
    board[dest.getLocation()]->setPosition(dest);
-   board[src.getLocation()] = make_unique<Space>(Space()); // Use non-default ctor if there's bugs...?
+   board[src.getLocation()] = make_unique<Space>(Space());
 }
 
-void Board::draw(Interface* pUI) const {
-    ogstream gout;
+/**************************************************
+ * BOARD :: DRAW
+ * Draw the board and pieces, as well as click and hover positions 
+ * if the game is ongoing
+ **************************************************/
+void Board::draw(Interface* pUI, Winner winner) const
+{
+   ogstream gout;
 
-    gout.drawBoard();
+   gout.drawBoard();
 
-    // draw any selections
-    gout.drawHover(pUI->getHoverPosition());
-    gout.drawSelected(pUI->getSelectPosition());
-    int debug = pUI->getSelectPosition();
-    if (pUI->getSelectPosition() >= 0 && pUI->getSelectPosition() <= 63) {
-        // draw the possible moves
-        list<Move> possible = board[pUI->getSelectPosition()]->getMoves(*this);
-        for (auto move : possible)
+   if (winner == NONE)
+   {
+      // draw any selections
+      gout.drawHover(pUI->getHoverPosition());
+      gout.drawSelected(pUI->getSelectPosition());
+      if (pUI->getSelectPosition() >= 0 && pUI->getSelectPosition() <= 63)
+      {
+         // draw the possible moves
+         list<Move> possible = board[pUI->getSelectPosition()]->getMoves(*this);
+         for (auto move : possible)
             gout.drawPossible(move.getDest().getLocation());
-    }
-    
-    for (auto &spot : board )
-    {
-        spot->draw(gout);
-    }
-}
+      }
+   }
+   else
+   {
+      gout.setPosition(80, 124);
+      gout << (winner == BLACK ? "Black Wins!" : "White Wins!");
+   }
 
-void Board::checkWin() {
-    bool blackWin = true;
-    bool whiteWin = true;
-    for (auto &piece : board) {
-        if (piece->getLetter() == 'k') {
-            if (piece->isWhite()) {
-                blackWin = false;
-            }
-            else {
-                whiteWin = false;
-            }
-        }
-    }
-
-    if (blackWin) {
-        exit(0);
-    }
-    if (whiteWin) {
-        exit(0);
-    }
+   for (auto& piece : board)
+      piece->draw(gout);
 }

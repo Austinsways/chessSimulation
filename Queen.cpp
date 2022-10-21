@@ -20,7 +20,6 @@ list<Move> Queen::getMoves(const Board& board) const
    {
       auto slideMoves = getSlideMoves(board, delta);
       moves.splice(moves.end(), slideMoves);
-      //moves.merge(slideMoves);
    }
    return moves;
 }

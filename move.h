@@ -18,7 +18,7 @@
 class Move
 {
 public:
-   Move() : enpassant(false), castleK(false), castleQ(false), isWhite(false) {}
+   Move() : piece(' '), capture(' '), enpassant(false), castleK(false), castleQ(false), isWhite(false) {}
    Move(Position source, Position dest, bool isWhite) :
       source(source),
       dest(dest),

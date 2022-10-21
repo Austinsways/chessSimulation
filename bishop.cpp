@@ -10,7 +10,6 @@ std::list<Move> Bishop::getMoves(const Board& board) const {
     {
         auto slideMoves = getSlideMoves(board, delta);
         moves.splice(moves.end(), slideMoves);
-        //moves.merge(slideMoves);
     }
     return moves;
 }

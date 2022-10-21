@@ -9,21 +9,28 @@
 #include "uiInteract.h"
 #include "board.h"
 
+enum Winner
+{
+   WHITE,
+   BLACK,
+   NONE
+};
+
 class Game
 {
 public:
-	Game() {
-		startPosition = -2;
-		board.reset();
-	}
-	void advance(Interface* pUI);
-	void draw(Interface* pUI); 
-	void checkWin();
-	bool getWhiteTurn() { return whiteTurn; };
+   Game()
+   {
+      whiteTurn = true;
+      board.reset();
+      winner = NONE;
+   }   
+   void advance(Interface* pUI);
+   void draw(Interface* pUI);
+   bool getWhiteTurn() { return whiteTurn; };
 
 private:
-	bool whiteTurn = true;
-	Board board;
-	int startPosition;
-	int desiredPosition;
+   bool whiteTurn;
+   Board board;
+   Winner winner;
 };

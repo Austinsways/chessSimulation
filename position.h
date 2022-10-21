@@ -19,20 +19,12 @@ struct Delta
 class Position
 {
 public:
-   Position() : location(0), squareWidth(50), squareHeight(50) {}
-   Position(int col, int row) : squareWidth(50), squareHeight(50)
-   {
-      set(col, row);
-   }
-   Position(int desiredLocation) : squareWidth(50), squareHeight(50)
-   {
-       this->location = desiredLocation;
-   }
+   Position() : location(0) {}
+   Position(int col, int row) { set(col, row); }
+   Position(int location) { this->location = location; }
    int getLocation() const { return location; }
    int getRow() const { return (int)location / 8; }
    int getCol() const { return (int)location % 8; }
-   int getX() const { return getCol() * squareWidth; }
-   int getY() const { return getRow() * squareHeight; }
    bool isValid() const { return 0 <= location && location < 64; }
    void setRow(int row) { set(getCol(), row); }
    void setCol(int col) { set(col, getRow()); }
@@ -45,7 +37,5 @@ public:
 
 private:
    char location;
-   double squareWidth;
-   double squareHeight;
 };
 

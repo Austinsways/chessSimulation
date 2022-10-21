@@ -32,7 +32,7 @@ public:
 	bool isWhite() const { return white; }
 	bool isMove() const {}
 	int getNMoves() const { return nMoves; }
-	void incrementNMoves() { nMoves++; }
+	void setMove(int lastMove) { this->lastMove = lastMove; nMoves++; }
 	Position getPosition() const { return position; }
 	void setPosition(Position position) { this->position = position; }
 	bool justMoved(const Board& board) const;
