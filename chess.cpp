@@ -7,9 +7,12 @@
 
 #include "uiInteract.h"   // for Interface
 #include "uiDraw.h"       // for draw*
-#include "testPawn.h"     // for Pawn unit tests
 #include "testKing.h"     // for King unit tests
 #include "testQueen.h"    // for Queen unit tests
+#include "testBishop.h"   // for Bishop unit tests
+#include "testKnight.h"   // for Knight unit tests
+#include "testRook.h"     // for Rook unit tests
+#include "testPawn.h"     // for Pawn unit tests
 #include "board.h"
 #include "game.h"
 
@@ -17,6 +20,7 @@
 #include <cassert>        // for ASSERT
 #include <fstream>        // for IFSTREAM
 #include <string>         // for STRING
+
 using namespace std;
 
 //#define DEBUG
@@ -65,12 +69,18 @@ int main(int argc, char** argv)
 #endif // !_WIN32
 
 #ifdef DEBUG
-   TestPawn testPawn;
-   testPawn.run();
    TestKing testKing;
    testKing.run();
    TestQueen testQueen;
    testQueen.run();
+   TestBishop testBishop;
+   testBishop.run();
+   TestKnight testKnight;
+   testKnight.run();
+   TestRook testRook;
+   testRook.run();
+   TestPawn testPawn;
+   testPawn.run();
 #endif
 
    Game game;

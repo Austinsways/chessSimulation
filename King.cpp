@@ -8,7 +8,6 @@
 #include "king.h"
 #include "move.h"
 
-
 #include <list>
 
 using namespace std;
@@ -141,7 +140,8 @@ list<Move> King::getMoves(const Board& board) const
       }
    }
 
-   if (nMoves == 0){
+   if (nMoves == 0)
+   {
       // queen side
       bool canCastle = true;
       Position checkPos(position);
@@ -168,10 +168,13 @@ list<Move> King::getMoves(const Board& board) const
 
    }
 
-
    return moves;
 }
 
-void King::draw(ogstream& gout) const {
+/**************************************************
+ * KING :: DRAW
+ **************************************************/
+void King::draw(ogstream& gout) const
+{
    gout.drawKing(position.getLocation(), !white);
 }

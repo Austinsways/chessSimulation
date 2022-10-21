@@ -106,10 +106,14 @@ list<Move> Pawn::getMoves(const Board& board) const
          }
       }
    }
-   
+
    return moves;
 }
 
-void Pawn::draw(ogstream& gout) const {
+/**************************************************
+ * PAWN :: DRAW
+ **************************************************/
+void Pawn::draw(ogstream& gout) const
+{
    gout.drawPawn(position.getLocation(), !white);
 }

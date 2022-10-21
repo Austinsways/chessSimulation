@@ -13,17 +13,21 @@
 #include "board.h"
 
 using namespace::std;
-class TestKing;
 class TestRook;
+class TestKing;
 
+/**************************************************
+ * ROOK
+ * A Rook chess piece
+ **************************************************/
 class Rook : public Piece
 {
 public:
+   friend TestRook;
    friend TestKing;
 
    Rook() : Piece() {}
    Rook(int col, int row, bool white) : Piece(col, row, white) {}
-
    char getLetter() const { return 'r'; }
    void display(ogstream gout) const {}
    std::list<Move> getMoves(const Board& board) const;

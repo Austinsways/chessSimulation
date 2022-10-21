@@ -16,17 +16,20 @@
 
 class TestKnight;
 
+/**************************************************
+ * KNIGHT
+ * A Knight chess piece
+ **************************************************/
 class Knight : public Piece
 {
 public:
-	friend TestKnight;
+   friend TestKnight;
 
-	Knight() : Piece() {}
-	Knight(int col, int row, bool white) : Piece(col, row, white) {}
-
-	char getLetter() const { return 'n'; }
-	void display(ogstream gout) const {}
-	std::list<Move> getMoves(const Board& board) const;
-	virtual std::unique_ptr<Piece> clone() const { return std::make_unique<Knight>(*this); };
-	void draw(ogstream& gout) const;
+   Knight() : Piece() {}
+   Knight(int col, int row, bool white) : Piece(col, row, white) {}
+   char getLetter() const { return 'n'; }
+   void display(ogstream gout) const {}
+   std::list<Move> getMoves(const Board& board) const;
+   virtual std::unique_ptr<Piece> clone() const { return std::make_unique<Knight>(*this); };
+   void draw(ogstream& gout) const;
 };

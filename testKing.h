@@ -17,6 +17,10 @@
 
 using namespace std;
 
+/**************************************************
+ * TEST KING
+ * Unit tests for the King class
+ **************************************************/
 class TestKing
 {
 public:

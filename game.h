@@ -16,6 +16,10 @@ enum Winner
    NONE
 };
 
+/**************************************************
+ * GAME
+ * Contains the logic to run the Chess game
+ **************************************************/
 class Game
 {
 public:
@@ -24,7 +28,7 @@ public:
       whiteTurn = true;
       board.reset();
       winner = NONE;
-   }   
+   }
    void advance(Interface* pUI);
    void draw(Interface* pUI);
    bool getWhiteTurn() { return whiteTurn; };

@@ -16,6 +16,10 @@
 
 class TestBishop;
 
+/**************************************************
+ * BISHOP
+ * A Bishop chess piece
+ **************************************************/
 class Bishop : public Piece
 {
 public:
@@ -23,7 +27,6 @@ public:
 
    Bishop() : Piece() {}
    Bishop(int col, int row, bool white) : Piece(col, row, white) {}
-
    char getLetter() const { return 'p'; }
    void display(ogstream gout) const {}
    std::list<Move> getMoves(const Board& board) const;

@@ -19,20 +19,7 @@
 #include "game.h"
 #include "uiInteract.h"
 
- //#include <stdio.h>
- //#include <stdlib.h>
-#include <GL/glut.h> 
-
 using namespace std;
-
-
-/**************************************************
- * BOARD CONSTRUCTOR
- **************************************************/
-Board::Board() : currentMove(0)
-{
-   reset();
-}
 
 /**************************************************
  * BOARD :: GET
@@ -142,8 +129,7 @@ void Board::move(const Move& move)
       }
 
       if (!didEnpassant)
-         throw "The was not a pawn to En Passant";
-
+         throw "There was not a pawn to En Passant";
    }
 
    // Check promotion to Queen
@@ -191,7 +177,7 @@ void Board::moveTo(Position src, Position dest)
 
 /**************************************************
  * BOARD :: DRAW
- * Draw the board and pieces, as well as click and hover positions 
+ * Draw the board and pieces, as well as click and hover positions
  * if the game is ongoing
  **************************************************/
 void Board::draw(Interface* pUI, Winner winner) const
@@ -202,12 +188,12 @@ void Board::draw(Interface* pUI, Winner winner) const
 
    if (winner == NONE)
    {
-      // draw any selections
+      // Draw any selections
       gout.drawHover(pUI->getHoverPosition());
       gout.drawSelected(pUI->getSelectPosition());
-      if (pUI->getSelectPosition() >= 0 && pUI->getSelectPosition() <= 63)
+      if (pUI->getSelectPosition() >= 0 && pUI->getSelectPosition() < 64)
       {
-         // draw the possible moves
+         // Draw the possible moves
          list<Move> possible = board[pUI->getSelectPosition()]->getMoves(*this);
          for (auto move : possible)
             gout.drawPossible(move.getDest().getLocation());

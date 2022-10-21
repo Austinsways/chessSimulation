@@ -7,8 +7,6 @@
 
 #include "piece.h"
 #include "board.h"
-#include <GL/glut.h> 
-
 
 using namespace std;
 
@@ -16,7 +14,8 @@ using namespace std;
  * PIECE :: JUST MOVED
  * Determine if a piece moved during the last turn
  **************************************************/
-bool Piece::justMoved(const Board& board) const {
+bool Piece::justMoved(const Board& board) const
+{
    return board.getCurrentMove() - lastMove == 1;
 }
 
@@ -54,11 +53,17 @@ list<Move> Piece::getSlideMoves(const Board& board, const Delta& delta) const
    return moves;
 }
 
+/**************************************************
+ * OPERATOR == PIECE, CHAR
+ **************************************************/
 bool operator==(const Piece& lhs, char rhs)
 {
    return lhs.getLetter() == rhs;
 }
 
+/**************************************************
+ * OPERATOR != PIECE, CHAR
+ **************************************************/
 bool operator!=(const Piece& lhs, char rhs)
 {
    return !(lhs == rhs);

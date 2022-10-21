@@ -18,31 +18,34 @@ using namespace std;
  **************************************************/
 string Move::getText() const
 {
-	string text = "";
-	text+=(char)('a' + source.getCol());
-	text += (char)('1' + source.getRow());
+   string text = "";
+   text += (char)('a' + source.getCol());
+   text += (char)('1' + source.getRow());
 
-	text += (char)('a' + dest.getCol());
-	text += (char)('1' + dest.getRow());
+   text += (char)('a' + dest.getCol());
+   text += (char)('1' + dest.getRow());
 
-	if ('a' <= capture && capture < 'z')
-		text += capture;
+   if ('a' <= capture && capture < 'z')
+      text += capture;
 
-	if ('A' <= piece && piece <= 'Z')
-		text += piece;
-	
-	if (enpassant)
-		text += 'E';
+   if ('A' <= piece && piece <= 'Z')
+      text += piece;
 
-	if (castleK)
-		text += 'c';
+   if (enpassant)
+      text += 'E';
 
-	if (castleQ)
-		text += 'C';
+   if (castleK)
+      text += 'c';
 
-	return text;
+   if (castleQ)
+      text += 'C';
+
+   return text;
 }
 
+/**************************************************
+ * OPERATOR << MOVE
+ **************************************************/
 ostream& operator<<(ostream& out, const Move& move)
 {
    out << move.getText();

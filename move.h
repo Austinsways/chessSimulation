@@ -27,7 +27,7 @@ public:
       enpassant(false),
       castleK(false),
       castleQ(false),
-      isWhite(isWhite) { }
+      isWhite(isWhite) {}
    std::string getText() const;
    Position getSrc() const { return source; }
    Position getDest() const { return dest; }

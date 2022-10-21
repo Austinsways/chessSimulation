@@ -16,6 +16,10 @@
 
 using namespace std;
 
+/**************************************************
+ * TEST QUEEN
+ * Unit tests for the Queen class
+ **************************************************/
 class TestQueen
 {
 public:

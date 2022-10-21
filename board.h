@@ -15,9 +15,9 @@
 #include "move.h"
 #include "uiInteract.h"
 
+class TestBoard;
 enum Winner;
 
-class TestBoard;
 /**************************************************
  * BOARD
  * The chess board
@@ -27,7 +27,7 @@ class Board
 public:
    friend TestBoard;
 
-   Board();
+   Board() : currentMove(0) { reset(); }
    int getCurrentMove() const { return currentMove; }
    bool whiteTurn() const { return currentMove % 2 == 1; }
    void display(const Position& hover, const Position& selected) const {}
@@ -44,4 +44,3 @@ private:
    int currentMove;
    void moveTo(Position pos1, Position pos2);
 };
-

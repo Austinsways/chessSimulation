@@ -7,10 +7,12 @@
 
 #include "position.h"
 
- /**************************************************
-  * POSITION :: SET
-  * Set the position with a row and column
-  **************************************************/
+using namespace std;
+
+/**************************************************
+ * POSITION :: SET
+ * Set the position with a row and column
+ **************************************************/
 void Position::set(int col, int row)
 {
    if (row < 0 || row > 7 || col < 0 || col > 7)
@@ -19,6 +21,9 @@ void Position::set(int col, int row)
       location = col + row * 8;
 }
 
+/**************************************************
+ * POSITION :: OPERATOR + DELTA
+ **************************************************/
 Position Position::operator+(const Delta& rhs)
 {
    Position newPos(*this);
@@ -27,6 +32,9 @@ Position Position::operator+(const Delta& rhs)
    return newPos;
 }
 
+/**************************************************
+ * POSITION :: OPERATOR += DELTA
+ **************************************************/
 Position& Position::operator+=(const Delta& rhs)
 {
    adjustCol(rhs.col);

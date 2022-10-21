@@ -15,6 +15,10 @@
 
 using namespace std;
 
+/**************************************************
+ * TEST PAWN
+ * Unit tests for the Pawn class
+ **************************************************/
 class TestPawn
 {
 public:
@@ -70,7 +74,7 @@ private:
       set<string> actualMoves{};
       for (auto& move : moves)
          actualMoves.insert(move.getText());
-      
+
       assert(expectedMoves == actualMoves);
       assert(pawn.position == Position(3, 3));
       assert(pawn2.position == Position(3, 4));
@@ -326,7 +330,7 @@ private:
       auto moves = pawn.getMoves(board);
 
       // verify
-      set<string> expectedMoves{ "b7a8pQ", "b7b8Q", "b7c8pQ"};
+      set<string> expectedMoves{ "b7a8pQ", "b7b8Q", "b7c8pQ" };
       set<string> actualMoves;
       for (auto& move : moves)
          actualMoves.insert(move.getText());

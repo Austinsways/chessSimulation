@@ -12,6 +12,10 @@
 
 using namespace std;
 
+/**************************************************
+ * QUEEN :: GET MOVES
+ * Get all possible moves for the Queen
+ **************************************************/
 list<Move> Queen::getMoves(const Board& board) const
 {
    list<Move> moves;
@@ -24,8 +28,10 @@ list<Move> Queen::getMoves(const Board& board) const
    return moves;
 }
 
-void Queen::draw(ogstream& gout) const {
+/**************************************************
+ * QUEEN :: DRAW
+ **************************************************/
+void Queen::draw(ogstream& gout) const
+{
    gout.drawQueen(position.getLocation(), !white);
 }
-
-
