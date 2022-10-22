@@ -5,11 +5,13 @@
  *    Eddie McConkie
  **************************************************/
 
-#include <set>
-
 #include "uiInteract.h"
+#include "position.h"
 #include "game.h"
+#include "piece.h"
 #include "move.h"
+
+#include <set>
 
 using namespace std;
 

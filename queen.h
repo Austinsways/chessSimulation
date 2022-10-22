@@ -6,12 +6,13 @@
  **************************************************/
 #pragma once
 
-#include <list>
-
 #include "uiDraw.h"
 #include "move.h"
 #include "piece.h"
 #include "board.h"
+
+#include <memory>
+#include <list>
 
 class TestQueen;
 
@@ -26,6 +27,7 @@ public:
 
    Queen() : Piece() {}
    Queen(int col, int row, bool white) : Piece(col, row, white) {}
+   Queen(Position position, bool white) : Piece(position, white) {}
    char getLetter() const { return 'q'; }
    void display(ogstream gout) const {}
    std::list<Move> getMoves(const Board& board) const;

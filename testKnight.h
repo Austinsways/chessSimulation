@@ -6,13 +6,13 @@
  **************************************************/
 #pragma once
 
-#include <cassert>
-#include <set>
-#include <string>
-
 #include "knight.h"
 #include "pawn.h"
 #include "board.h"
+
+#include <cassert>
+#include <set>
+#include <string>
 
 using namespace std;
 

@@ -6,14 +6,14 @@
  **************************************************/
 #pragma once
 
-#include <memory>
-#include <array>
-
+#include "uiInteract.h"
 #include "uiDraw.h"
 #include "piece.h"
 #include "position.h"
 #include "move.h"
-#include "uiInteract.h"
+
+#include <memory>
+#include <array>
 
 class TestBoard;
 enum Winner;

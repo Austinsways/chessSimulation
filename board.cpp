@@ -5,9 +5,7 @@
  *    Eddie McConkie
  **************************************************/
 
-#include <cassert>
-#include <memory>
-
+#include "uiInteract.h"
 #include "board.h"
 #include "space.h"
 #include "pawn.h"
@@ -17,7 +15,9 @@
 #include "queen.h"
 #include "king.h"
 #include "game.h"
-#include "uiInteract.h"
+
+#include <cassert>
+#include <memory>
 
 using namespace std;
 
@@ -113,14 +113,19 @@ void Board::move(const Move& move)
    // Check for En Passant
    if (move.getEnPassant())
    {
-      Position sides[2]{ src + Delta{ -1, 0}, src + Delta{1, 0} };
+      Position sides[2]{
+         src + Delta{ -1, 0 },
+         src + Delta{  1, 0 }
+      };
       bool didEnpassant = false;
       for (const Position& side : sides)
       {
          if (side.isValid())
          {
             const Piece& piece = get(side);
-            if (piece == 'p' && piece.isWhite() != move.isWhiteMove())
+            if (piece == 'p' 
+               && piece.justMoved(*this)
+               && piece.isWhite() != move.isWhiteMove())
             {
                board[side.getLocation()] = make_unique<Space>(Space());
                didEnpassant = true;
@@ -135,7 +140,8 @@ void Board::move(const Move& move)
    // Check promotion to Queen
    if (move.getPromotion() == 'Q')
    {
-      board[dest.getLocation()] = make_unique<Queen>(Queen(dest.getCol(), dest.getRow(), move.isWhiteMove()));
+      Queen queen(dest, move.isWhiteMove());
+      board[dest.getLocation()] = make_unique<Queen>(queen);
    }
 
    // Check king-side castle

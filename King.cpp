@@ -5,10 +5,14 @@
  *    Eddie McConkie
  **************************************************/
 
+#include "uiDraw.h"
 #include "king.h"
 #include "move.h"
+#include "position.h"
+#include "piece.h"
 
 #include <list>
+#include <cassert>
 
 using namespace std;
 
@@ -19,153 +23,87 @@ using namespace std;
 list<Move> King::getMoves(const Board& board) const
 {
    list<Move> moves;
-   int lastRow = white ? 7 : 0;
 
-   // Normal forward and backwards move
-   Position oneAhead(position);
-   oneAhead.adjustRow(white ? 1 : -1);
-   if (oneAhead.isValid() && board.get(oneAhead).getLetter() == ' ')
+   // Normal moves
+   Delta deltas[8]{
+      { -1,  1 }, { 0,  1 }, { 1,  1 },
+      { -1,  0 },            { 1,  0 },
+      { -1, -1 }, { 0, -1 }, { 1, -1 }
+   };
+
+   for (auto& delta : deltas)
    {
-      Move move(position, oneAhead, white);
-      moves.push_back(Move(position, oneAhead, white));
-   }
-
-   Position oneBack(position);
-   oneBack.adjustRow(white ? -1 : 1);
-   if (oneBack.isValid() && board.get(oneBack).getLetter() == ' ')
-   {
-      Move move(position, oneBack, white);
-      moves.push_back(Move(position, oneBack, white));
-   }
-
-   //normal sideways moves
-   Position sideRight(position);
-   sideRight.adjustCol(white ? 1 : -1);
-   if (sideRight.isValid() && board.get(sideRight).getLetter() == ' ')
-   {
-      Move move(position, sideRight, white);
-      moves.push_back(Move(position, sideRight, white));
-   }
-   Position sideLeft(position);
-   sideLeft.adjustCol(white ? -1 : 1);
-   if (sideLeft.isValid() && board.get(sideLeft).getLetter() == ' ')
-   {
-      Move move(position, sideLeft, white);
-      moves.push_back(Move(position, sideLeft, white));
-   }
-
-   //diagonal moves
-   Position sideRightUp(position);
-   sideRightUp.adjustCol(white ? 1 : -1);
-   sideRightUp.adjustRow(white ? 1 : -1);
-
-   if (sideRightUp.isValid() && board.get(sideRightUp).getLetter() == ' ')
-   {
-      Move move(position, sideRightUp, white);
-      moves.push_back(Move(position, sideRightUp, white));
-   }
-
-   Position sideLeftUp(position);
-   sideLeftUp.adjustCol(white ? 1 : -1);
-   sideLeftUp.adjustRow(white ? -1 : 1);
-
-   if (sideLeftUp.isValid() && board.get(sideLeftUp).getLetter() == ' ')
-   {
-      Move move(position, sideLeftUp, white);
-      moves.push_back(Move(position, sideLeftUp, white));
-   }
-
-   Position sideRightDown(position);
-   sideRightDown.adjustCol(white ? -1 : 1);
-   sideRightDown.adjustRow(white ? 1 : -1);
-
-   if (sideRightDown.isValid() && board.get(sideRightDown).getLetter() == ' ')
-   {
-      Move move(position, sideRightDown, white);
-      moves.push_back(Move(position, sideRightDown, white));
-   }
-
-   Position sideLeftDown(position);
-   sideLeftDown.adjustCol(white ? -1 : 1);
-   sideLeftDown.adjustRow(white ? -1 : 1);
-
-   if (sideLeftDown.isValid() && board.get(sideLeftDown).getLetter() == ' ')
-   {
-      Move move(position, sideLeftDown, white);
-      moves.push_back(Move(position, sideLeftDown, white));
-   }
-
-   // captures
-
-   Position diagonals[8]{ sideRightUp,sideLeftUp, sideLeftDown, sideRightDown, sideRight, sideLeft, oneAhead, oneBack };
-   for (const auto& diagonal : diagonals)
-   {
-      if (diagonal.isValid())
+      Position checkPos = position + delta;
+      if (checkPos.isValid())
       {
-         const Piece& opponent = board.get(diagonal);
-         if (opponent.getLetter() != ' ' && opponent.isWhite() != white)
+         const Piece& piece = board.get(checkPos);
+         if (piece == ' ' || piece.isWhite() != white)
          {
-            Move move(position, diagonal, white);
-            move.setCapture(opponent.getLetter());
+            Move move(position, checkPos, white);
+            if (piece != ' ')
+               move.setCapture(piece.getLetter());
+
             moves.push_back(move);
          }
       }
    }
 
-   //castle
-   if (nMoves == 0)
+   // Castling
+   struct Castle
    {
-      // king side
-      bool canCastle = true;
-      Position checkPos(position);
-      checkPos.adjustCol(1);
-      while (checkPos.getCol() < 7)
+      Position kingDest;
+      Position corner;
+      Delta offset;
+      bool kingSide;
+   };
+
+   Castle castles[2]{
+      {
+         position + Delta{ 2, 0 },
+         position + Delta{ 3, 0 },
+         Delta{ 1, 0 },
+         true
+      },
+      {
+         position + Delta{ -2, 0 },
+         position + Delta{ -4, 0 },
+         Delta{ -1, 0 },
+         false
+      }
+   };
+
+   for (auto& castle : castles)
+   {
+      // King hasn't moved
+      if (nMoves != 0)
+         continue;
+
+      assert(position.getCol() == 4);
+      assert(position.getRow() == (white ? 0 : 7));
+      assert(castle.corner.isValid());
+
+      // Rook hasn't moved
+      const Piece& rook = board.get(castle.corner);
+      if (rook != 'r' || rook.getNMoves() != 0)
+         continue;
+
+      // All spaces in between are empty
+      bool clear = true;
+      Position checkPos = position + castle.offset;
+      while (checkPos != castle.corner)
       {
          if (board.get(checkPos) != ' ')
-            canCastle = false;
-         checkPos.adjustCol(1);
-      }
-      const Piece& rook = board.get(checkPos);
-      if (canCastle
-         && rook == 'r'
-         && rook.getNMoves() == 0
-         && white == rook.isWhite()
-         )
-      {
-         Position dest(position);
-         dest.adjustCol(2);
-         Move move(position, dest, white);
-         move.setCastleK(true);
-         moves.push_back(move);
-      }
-   }
+            clear = false;
 
-   if (nMoves == 0)
-   {
-      // queen side
-      bool canCastle = true;
-      Position checkPos(position);
-      checkPos.adjustCol(-1);
-      while (checkPos.getCol() > 0)
-      {
-         if (board.get(checkPos) != ' ')
-            canCastle = false;
-         checkPos.adjustCol(-1);
-      }
-      const Piece& rook = board.get(checkPos);
-      if (canCastle
-         && rook == 'r'
-         && rook.getNMoves() == 0
-         && white == rook.isWhite()
-         )
-      {
-         Position dest(position);
-         dest.adjustCol(-2);
-         Move move(position, dest, white);
-         move.setCastleQ(true);
-         moves.push_back(move);
+         checkPos += castle.offset;
       }
 
+      if (clear)
+      {
+         Move move(position, castle.kingDest, white);
+         castle.kingSide ? move.setCastleK() : move.setCastleQ();
+         moves.push_back(move);
+      }
    }
 
    return moves;

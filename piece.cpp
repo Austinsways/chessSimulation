@@ -8,6 +8,8 @@
 #include "piece.h"
 #include "board.h"
 
+#include <list>
+
 using namespace std;
 
 /**************************************************

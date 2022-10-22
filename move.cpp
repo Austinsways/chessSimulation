@@ -5,6 +5,7 @@
  *    Eddie McConkie
  **************************************************/
 
+#include "uiDraw.h"
 #include "move.h"
 
 #include <iostream>

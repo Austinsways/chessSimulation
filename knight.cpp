@@ -5,8 +5,12 @@
  *    Eddie McConkie
  **************************************************/
 
+#include "uiDraw.h"
 #include "knight.h"
 #include "move.h"
+#include "position.h"
+#include "piece.h"
+
 #include <list>
 
 using namespace std;
@@ -18,23 +22,27 @@ using namespace std;
 list<Move> Knight::getMoves(const Board& board) const
 {
    list<Move> moves;
-   Delta deltas[8]{ {2,1}, {2,-1}, {1,2}, {1,-2}, {-2,1}, {-2,-1}, {-1, 2}, {-1,-2} };
+   Delta deltas[8]{
+             { -1,  2 }, { 1,  2 },
+      { -2,  1 },              { 2,  1 },
+      { -2, -1 },              { 2, -1 },
+             { -1, -2 }, { 1, -2 }
+   };
    for (auto& delta : deltas)
    {
-      Position possiblePosition(position);
-      possiblePosition.adjustCol(delta.col);
-      possiblePosition.adjustRow(delta.row);
-      if (possiblePosition.isValid()
-         && (board.get(possiblePosition).getLetter() == ' '
-            || board.get(possiblePosition).isWhite() != this->isWhite())
-         )
+      Position checkPos = position + delta;
+
+      if (checkPos.isValid())
       {
-         Move move(position, possiblePosition, white);
-         if (board.get(possiblePosition).getLetter() != ' ')
+         const Piece& piece = board.get(checkPos);
+         if (piece == ' ' || piece.isWhite() != white)
          {
-            move.setCapture(board.get(possiblePosition).getLetter());
+            Move move(position, checkPos, white);
+            if (piece != ' ')
+               move.setCapture(piece.getLetter());
+
+            moves.push_back(move);
          }
-         moves.push_back(move);
       }
    }
    return moves;

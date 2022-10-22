@@ -24,9 +24,9 @@ void Position::set(int col, int row)
 /**************************************************
  * POSITION :: OPERATOR + DELTA
  **************************************************/
-Position Position::operator+(const Delta& rhs)
+Position operator+(const Position& lhs, const Delta& rhs)
 {
-   Position newPos(*this);
+   Position newPos(lhs);
    newPos.adjustCol(rhs.col);
    newPos.adjustRow(rhs.row);
    return newPos;

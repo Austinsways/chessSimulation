@@ -85,7 +85,6 @@ int main(int argc, char** argv)
 
    Game game;
 
-   // set everything into action
    ui.run(callBack, &game);
 
    return 0;

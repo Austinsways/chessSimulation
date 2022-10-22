@@ -6,12 +6,13 @@
  **************************************************/
 #pragma once
 
-#include <list>
-
 #include "uiDraw.h"
 #include "move.h"
 #include "piece.h"
 #include "board.h"
+
+#include <memory>
+#include <list>
 
 using namespace::std;
 class TestRook;

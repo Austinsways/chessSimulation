@@ -11,6 +11,7 @@
 #include "piece.h"
 #include "board.h"
 
+#include <memory>
 #include <list>
 
 /**************************************************

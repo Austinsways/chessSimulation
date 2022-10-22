@@ -5,9 +5,12 @@
  *    Eddie McConkie
  **************************************************/
 
+#include "uiDraw.h"
 #include "pawn.h"
 #include "move.h"
 #include "board.h"
+#include "position.h"
+#include "piece.h"
 
 #include <list>
 
@@ -23,8 +26,7 @@ list<Move> Pawn::getMoves(const Board& board) const
    int lastRow = white ? 7 : 0;
 
    // Normal move
-   Position oneAhead(position);
-   oneAhead.adjustRow(white ? 1 : -1);
+   Position oneAhead = position + Delta{ 0, white ? 1 : -1 };
    if (oneAhead.isValid() && board.get(oneAhead).getLetter() == ' ')
    {
       Move move(position, oneAhead, white);
@@ -36,8 +38,7 @@ list<Move> Pawn::getMoves(const Board& board) const
    // Move two spaces
    if (nMoves == 0)
    {
-      Position twoAhead(position);
-      twoAhead.adjustRow(white ? 2 : -2);
+      Position twoAhead = position + Delta{ 0, white ? 2 : -2 };
       if (twoAhead.isValid()
          && board.get(oneAhead).getLetter() == ' '
          && board.get(twoAhead).getLetter() == ' '
@@ -46,12 +47,10 @@ list<Move> Pawn::getMoves(const Board& board) const
    }
 
    // Diagonal capture
-   Position diagonalLeft(oneAhead);
-   diagonalLeft.adjustCol(-1);
-   Position diagonalRight(oneAhead);
-   diagonalRight.adjustCol(1);
-
-   Position diagonals[2]{ diagonalLeft,diagonalRight };
+   Position diagonals[2]{
+      oneAhead + Delta{  1, 0 },
+      oneAhead + Delta{ -1, 0 }
+   };
    for (const auto& diagonal : diagonals)
    {
       if (diagonal.isValid())
@@ -80,15 +79,10 @@ list<Move> Pawn::getMoves(const Board& board) const
    int enpassantRow = white ? 4 : 3;
    if (position.getRow() == enpassantRow)
    {
-      Position left(position);
-      left.adjustCol(-1);
-      Position right(position);
-      right.adjustCol(1);
-      EnPassant sides[2];
-      sides[0].pawnPos = left;
-      sides[0].attackPos = diagonalLeft;
-      sides[1].pawnPos = right;
-      sides[1].attackPos = diagonalRight;
+      EnPassant sides[2]{
+         {position + Delta{  1, 0 }, oneAhead + Delta{  1, 0 }},
+         {position + Delta{ -1, 0 }, oneAhead + Delta{ -1, 0 }}
+      };
       for (const auto& side : sides)
       {
          if (side.pawnPos.isValid())
@@ -100,7 +94,7 @@ list<Move> Pawn::getMoves(const Board& board) const
                )
             {
                Move move(position, side.attackPos, white);
-               move.setEnPassant(true);
+               move.setEnPassant();
                moves.push_back(move);
             }
          }

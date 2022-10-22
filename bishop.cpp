@@ -5,8 +5,12 @@
  *    Eddie McConkie
  **************************************************/
 
+#include "uiDraw.h"
 #include "bishop.h"
 #include "move.h"
+#include "position.h"
+#include "piece.h"
+
 #include <list>
 
 using namespace std;

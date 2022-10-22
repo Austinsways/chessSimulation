@@ -11,8 +11,8 @@
 #include "piece.h"
 #include "board.h"
 
-#include <list>
 #include <memory>
+#include <list>
 
 class TestBishop;
 

@@ -5,8 +5,11 @@
  *    Eddie McConkie
  **************************************************/
 
+#include "uiDraw.h"
 #include "rook.h"
 #include "move.h"
+#include "position.h"
+#include "piece.h"
 
 #include <list>
 
@@ -19,7 +22,7 @@ using namespace std;
 list<Move> Rook::getMoves(const Board& board) const
 {
    list<Move> moves;
-   Delta deltas[4]{ {0,1}, {1,0}, {0,-1}, {-1,0} };
+   Delta deltas[4]{ { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
    for (auto& delta : deltas)
    {
       auto slideMoves = getSlideMoves(board, delta);

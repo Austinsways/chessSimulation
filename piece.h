@@ -6,12 +6,12 @@
  **************************************************/
 #pragma once
 
-#include <list>
-#include <memory>
-
 #include "uiDraw.h"
 #include "move.h"
 #include "position.h"
+
+#include <memory>
+#include <list>
 
 class Board;
 class TestPiece;
@@ -27,6 +27,7 @@ public:
 
    Piece() : white(true), nMoves(0), lastMove(-1), position(Position()) {}
    Piece(int col, int row, bool white) : white(white), nMoves(0), lastMove(-1), position(Position(col, row)) {}
+   Piece(Position position, bool white) : white(white), nMoves(0), lastMove(-1), position(Position(position)) {}
    void assign(const Position& pos) {}
    void assign(const Piece& piece) {}
    bool isWhite() const { return white; }

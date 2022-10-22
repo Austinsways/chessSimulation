@@ -11,14 +11,20 @@
 #include <iostream>
 #include <string>
 
-/**************************************************
- * MOVE
- * Represents the different types of moves in chess
- **************************************************/
+ /**************************************************
+  * MOVE
+  * Represents the different types of moves in chess
+  **************************************************/
 class Move
 {
 public:
-   Move() : piece(' '), capture(' '), enpassant(false), castleK(false), castleQ(false), isWhite(false) {}
+   Move() :
+      piece(' '),
+      capture(' '),
+      enpassant(false),
+      castleK(false),
+      castleQ(false),
+      isWhite(false) {}
    Move(Position source, Position dest, bool isWhite) :
       source(source),
       dest(dest),
@@ -39,9 +45,9 @@ public:
    bool isWhiteMove() const { return isWhite; }
    void setPromotion(char piece) { this->piece = piece; }
    void setCapture(char capture) { this->capture = capture; }
-   void setEnPassant(bool enpassant) { this->enpassant = enpassant; }
-   void setCastleK(bool castleK) { this->castleK = castleK; }
-   void setCastleQ(bool castleQ) { this->castleQ = castleQ; }
+   void setEnPassant() { enpassant = true; }
+   void setCastleK() { castleK = true; }
+   void setCastleQ() { castleQ = true; }
    void setWhiteMove(bool isWhite) { this->isWhite = isWhite; }
    void assign(const Move& move) {}
    void assign(const std::string& move) {}
