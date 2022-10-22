@@ -49,8 +49,6 @@ public:
    void setCastleK() { castleK = true; }
    void setCastleQ() { castleQ = true; }
    void setWhiteMove(bool isWhite) { this->isWhite = isWhite; }
-   void assign(const Move& move) {}
-   void assign(const std::string& move) {}
 
 private:
    Position source;
@@ -61,7 +59,6 @@ private:
    bool castleK;
    bool castleQ;
    bool isWhite;
-   std::string error;
 };
 
 std::ostream& operator<<(std::ostream& out, const Move& move);

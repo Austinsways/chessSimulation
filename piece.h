@@ -14,7 +14,6 @@
 #include <list>
 
 class Board;
-class TestPiece;
 
 /**************************************************
  * PIECE
@@ -23,8 +22,6 @@ class TestPiece;
 class Piece
 {
 public:
-   friend TestPiece;
-
    Piece() : white(true), nMoves(0), lastMove(-1), position(Position()) {}
    Piece(int col, int row, bool white) : white(white), nMoves(0), lastMove(-1), position(Position(col, row)) {}
    Piece(Position position, bool white) : white(white), nMoves(0), lastMove(-1), position(Position(position)) {}
@@ -38,7 +35,6 @@ public:
    void setPosition(Position position) { this->position = position; }
    bool justMoved(const Board& board) const;
    virtual char getLetter() const = 0;
-   virtual void display(ogstream gout) const = 0;
    virtual std::list<Move> getMoves(const Board& board) const = 0;
    virtual std::unique_ptr<Piece> clone() const = 0;
    virtual void draw(ogstream& gout) const = 0;
@@ -48,6 +44,7 @@ protected:
    bool white;
    int nMoves;
    int lastMove;
+
    std::list<Move> getSlideMoves(const Board& board, const Delta& delta) const;
 };
 

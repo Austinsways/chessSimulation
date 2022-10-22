@@ -31,7 +31,6 @@ public:
    }
    void advance(Interface* pUI);
    void draw(Interface* pUI);
-   bool getWhiteTurn() { return whiteTurn; };
 
 private:
    bool whiteTurn;

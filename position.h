@@ -26,11 +26,10 @@ public:
    int getRow() const { return (int)location / 8; }
    int getCol() const { return (int)location % 8; }
    bool isValid() const { return 0 <= location && location < 64; }
-   void setRow(int row) { set(getCol(), row); }
-   void setCol(int col) { set(col, getRow()); }
    void set(int col, int row);
    void adjustRow(int delta) { set(getCol(), getRow() + delta); }
    void adjustCol(int delta) { set(getCol() + delta, getRow()); }
+
    bool operator==(const Position& rhs) { return location == rhs.getLocation(); }
    bool operator!=(const Position& rhs) { return !(*this == rhs); }
    Position& operator+=(const Delta& rhs);
