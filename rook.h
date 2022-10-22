@@ -4,6 +4,7 @@
  *    Lehi Lopez
  *    Eddie McConkie
  **************************************************/
+#pragma once
 
 #include <list>
 

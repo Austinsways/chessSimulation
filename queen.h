@@ -1,4 +1,3 @@
-#pragma once
 /**************************************************
  * Authors:
  *    Austin Eldredge
