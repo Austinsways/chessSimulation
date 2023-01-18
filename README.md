@@ -1,0 +1,1 @@
+This is a chess simulation created using c++ and Object Oriented Programming. It was developed by a three part group including Eddie McConkie (eddiemcconkie), Lehi Lopez (lehilopez), and Austin Eldredge (lambsos & Austinsways)
